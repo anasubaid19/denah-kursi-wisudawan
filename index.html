@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0, user-scalable=yes">
   <title>Denah Kursi — Wisuda Akbar AL-WILDAN 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,18 +16,20 @@
       --gold:     #fbbf24;
       --gold-lt:  #fde68a;
       --gold-dk:  #b45309;
-      --green:    #10b981;
-      --pink:     #f472b6;
+      --green:    #059669;
+      --pink:     #db2777;
       --blue-lt:  #60a5fa;
       --white:    #ffffff;
       --glass:    rgba(255,255,255,0.04);
       --glass-bd: rgba(251,191,36,0.18);
       --r-xl:24px; --r-lg:16px; --r-md:12px; --r-sm:8px;
 
-      --c-seat:    #1a3461;
-      --c-student: #fbbf24;
-      --c-ayah:    #10b981;
-      --c-ibu:     #f472b6;
+      /* SVG colors — light background */
+      --c-bg:      #f1f5f9;
+      --c-seat:    #b8c9de;
+      --c-student: #d97706;
+      --c-ayah:    #059669;
+      --c-ibu:     #db2777;
     }
 
     html { scroll-behavior: smooth; }
@@ -54,11 +56,14 @@
         radial-gradient(ellipse 60% 45% at 15% 105%, rgba(59,130,246,.1) 0%,transparent 60%);
     }
 
-    /* ── LOADING ── */
+    /* ══════════════════════════════
+       LOADING SCREEN
+    ══════════════════════════════ */
     .ls {
       position:fixed; inset:0; z-index:9999;
       background:var(--bg);
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:24px;
       padding:32px; transition:opacity .5s, visibility .5s;
     }
     .ls.hide { opacity:0; visibility:hidden; pointer-events:none; }
@@ -77,25 +82,28 @@
     .ls-title em { font-style:normal; color:var(--gold); }
 
     .ls-prog-wrap { width:100%; max-width:280px; background:rgba(255,255,255,.07); border-radius:999px; height:6px; overflow:hidden; }
-    .ls-prog-bar { height:100%; width:0%; background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt)); border-radius:999px; transition:width .4s ease; box-shadow:0 0 12px rgba(251,191,36,.5); }
-    .ls-status { font-size:12px; font-weight:600; color:rgba(255,255,255,.4); text-align:center; }
+    .ls-prog-bar  { height:100%; width:0%; background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt)); border-radius:999px; transition:width .4s ease; box-shadow:0 0 12px rgba(251,191,36,.5); }
+    .ls-status    { font-size:12px; font-weight:600; color:rgba(255,255,255,.5); text-align:center; }
     .ls-status span { color:var(--gold); }
 
-    /* ── LAYOUT ── */
+    /* ══════════════════════════════
+       PAGE WRAP
+    ══════════════════════════════ */
     .wrap {
       position:relative; z-index:1;
-      width:100%; max-width:560px;
+      width:100%; max-width:580px;
       margin:0 auto;
-      padding:0 16px 60px;
+      padding:0 16px 64px;
       display:flex; flex-direction:column; gap:14px;
     }
+    @media(min-width:768px)  { .wrap { max-width:860px;  padding:0 32px 64px; gap:18px; } }
+    @media(min-width:1280px) { .wrap { max-width:1140px; padding:0 48px 64px; } }
 
-    @media(min-width:768px)  { .wrap { max-width:800px; padding:0 32px 60px; gap:18px; } }
-    @media(min-width:1200px) { .wrap { max-width:1100px; } }
-
-    /* ── HEADER ── */
+    /* ══════════════════════════════
+       HEADER
+    ══════════════════════════════ */
     .hdr { text-align:center; padding:40px 0 4px; }
-    @media(min-width:768px) { .hdr { padding:52px 0 8px; } }
+    @media(min-width:768px) { .hdr { padding:56px 0 8px; } }
 
     .hdr-badge {
       display:inline-flex; align-items:center; gap:7px;
@@ -106,181 +114,177 @@
     .hdr-badge i { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pdot 2s ease-in-out infinite; }
 
     .hdr h1 { font-size:26px; font-weight:900; line-height:1.15; letter-spacing:-.4px; }
-    @media(min-width:768px) { .hdr h1 { font-size:34px; } }
+    @media(min-width:768px)  { .hdr h1 { font-size:34px; } }
+    @media(min-width:1280px) { .hdr h1 { font-size:40px; } }
     .hdr h1 em { font-style:normal; color:var(--gold); }
-    .hdr p { margin-top:8px; font-size:13px; color:rgba(255,255,255,.45); }
+    .hdr p { margin-top:8px; font-size:13px; color:rgba(255,255,255,.6); font-weight:500; }
+    @media(min-width:768px) { .hdr p { font-size:14px; } }
     .hdr-rule { width:40px; height:2px; margin:16px auto 0; border-radius:999px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
 
-    /* ── CARD ── */
+    /* ══════════════════════════════
+       GLASS CARD
+    ══════════════════════════════ */
     .card {
       width:100%; background:var(--glass); border:1px solid var(--glass-bd);
       border-radius:var(--r-xl); padding:20px 18px;
       backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
       box-shadow:0 20px 48px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
     }
-    @media(min-width:768px) { .card { padding:24px 22px; } }
+    @media(min-width:768px) { .card { padding:24px 24px; } }
 
     .card-lbl {
       font-size:10px; font-weight:700; letter-spacing:1.8px;
       text-transform:uppercase; color:var(--gold); margin-bottom:14px;
       display:flex; align-items:center; gap:8px;
     }
-    .card-lbl::before { content:''; width:3px; height:14px; border-radius:999px; background:var(--gold); }
+    .card-lbl::before { content:''; width:3px; height:14px; border-radius:999px; background:var(--gold); flex-shrink:0; }
 
-    /* ── SEARCH ── */
-    .hari-wrap { display:flex; gap:8px; margin-bottom:12px; }
+    /* ══════════════════════════════
+       SEARCH
+    ══════════════════════════════ */
+    .hari-wrap { display:flex; gap:8px; margin-bottom:14px; }
+
     .hari-btn {
-      flex:1; padding:12px; border-radius:var(--r-md);
+      flex:1; padding:13px 8px; border-radius:var(--r-md);
       border:1.5px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.04);
       color:rgba(255,255,255,.5); font-family:inherit;
       font-size:14px; font-weight:700; cursor:pointer;
-      transition:all .2s;
+      transition:all .2s; line-height:1.3;
     }
+    .hari-btn small { display:block; font-size:10px; font-weight:500; opacity:.7; margin-top:2px; }
     .hari-btn.active {
       border-color:var(--gold); background:rgba(251,191,36,.12);
       color:var(--gold); box-shadow:0 0 0 3px rgba(251,191,36,.1);
     }
-    .hari-btn:hover:not(.active) { border-color:rgba(255,255,255,.25); color:rgba(255,255,255,.75); }
+    .hari-btn:hover:not(.active) { border-color:rgba(255,255,255,.25); color:rgba(255,255,255,.8); }
 
     .inp-row { display:flex; gap:10px; }
+
     .inp-seat {
-      flex:1; background:rgba(255,255,255,.06);
-      border:1.5px solid rgba(255,255,255,.1);
+      flex:1; background:rgba(255,255,255,.07);
+      border:1.5px solid rgba(255,255,255,.12);
       border-radius:var(--r-md); color:var(--white);
       font-family:inherit; font-size:16px; font-weight:600;
-      padding:13px 16px; outline:none;
+      padding:14px 16px; outline:none;
       transition:border-color .2s, background .2s, box-shadow .2s;
       -webkit-appearance:none; appearance:none;
     }
-    .inp-seat::placeholder { color:rgba(255,255,255,.28); font-weight:500; }
-    .inp-seat:focus { border-color:rgba(251,191,36,.55); background:rgba(255,255,255,.09); box-shadow:0 0 0 3px rgba(251,191,36,.1); }
+    .inp-seat::placeholder { color:rgba(255,255,255,.3); font-weight:500; }
+    .inp-seat:focus {
+      border-color:rgba(251,191,36,.6);
+      background:rgba(255,255,255,.1);
+      box-shadow:0 0 0 3px rgba(251,191,36,.12);
+    }
 
     .btn-cari {
-      padding:13px 20px; background:var(--gold); border:none;
+      padding:14px 22px; background:var(--gold); border:none;
       border-radius:var(--r-md); font-family:inherit;
-      font-size:14px; font-weight:800; color:var(--navy);
-      cursor:pointer; transition:transform .18s, opacity .18s;
-      white-space:nowrap;
+      font-size:15px; font-weight:800; color:var(--navy);
+      cursor:pointer; transition:transform .18s, opacity .18s; white-space:nowrap;
     }
     .btn-cari:active { transform:scale(.97); }
-    .btn-cari:disabled { opacity:.4; cursor:not-allowed; }
+    .btn-cari:disabled { opacity:.35; cursor:not-allowed; transform:none; }
 
-    .err-msg { font-size:12px; color:#fca5a5; margin-top:8px; display:none; }
+    .err-msg { font-size:12px; color:#fca5a5; margin-top:10px; display:none; font-weight:500; }
     .err-msg.on { display:block; }
 
-    /* ── INFO CARD ── */
+    /* ══════════════════════════════
+       INFO CARD
+    ══════════════════════════════ */
     .info-card { display:none; animation:fadeUp .3s ease; }
     .info-card.on { display:block; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;} }
 
-    .info-nama { font-size:18px; font-weight:800; margin-bottom:8px; color:var(--white); }
-    @media(min-width:768px) { .info-nama { font-size:22px; } }
+    .info-nama {
+      font-size:20px; font-weight:800; margin-bottom:10px;
+      line-height:1.2;
+    }
+    @media(min-width:768px) { .info-nama { font-size:24px; } }
 
-    .info-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+    .info-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
     .info-tag {
-      background:rgba(251,191,36,.12); border:1px solid rgba(251,191,36,.28);
-      border-radius:999px; padding:3px 12px;
+      background:rgba(251,191,36,.12); border:1px solid rgba(251,191,36,.3);
+      border-radius:999px; padding:4px 13px;
       font-size:11px; font-weight:700; color:var(--gold);
     }
 
-    .legend { display:flex; flex-wrap:wrap; gap:10px; }
-    .legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:rgba(255,255,255,.6); font-weight:600; }
-    .legend-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; }
+    .legend {
+      display:flex; flex-wrap:wrap; gap:12px;
+      padding-top:14px; border-top:1px solid rgba(255,255,255,.08);
+    }
+    .legend-item { display:flex; align-items:center; gap:7px; font-size:12px; color:rgba(255,255,255,.8); font-weight:600; }
+    .legend-dot  { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
 
-    /* ── GRID SECTIONS ── */
-    .grid-sections { display:flex; flex-direction:column; gap:14px; }
-    @media(min-width:1024px) {
-      .grid-sections { display:grid; grid-template-columns:1fr; }
-      .parent-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    /* ══════════════════════════════
+       GRID SECTIONS
+    ══════════════════════════════ */
+    .section-wisu  { width:100%; }
+    .section-par   {
+      display:flex; flex-direction:column; gap:14px;
+    }
+    @media(min-width:768px) {
+      .section-par { flex-direction:row; }
+      .section-par .grid-card { flex:1; min-width:0; }
     }
 
-    .grid-card { width:100%; }
+    .grid-card {
+      background:var(--glass); border:1px solid var(--glass-bd);
+      border-radius:var(--r-xl);
+      backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+      box-shadow:0 20px 48px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
+      overflow:hidden;
+    }
 
     .grid-header {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 16px 10px;
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:8px; padding:16px 18px 10px;
     }
+    @media(min-width:768px) { .grid-header { padding:18px 20px 12px; } }
 
     .grid-title {
-      display:flex; align-items:center; gap:8px;
-      font-size:12px; font-weight:700; color:var(--gold);
-      letter-spacing:1.5px; text-transform:uppercase;
+      font-size:11px; font-weight:700; letter-spacing:1.6px;
+      text-transform:uppercase; color:var(--gold);
+      display:flex; align-items:center; gap:7px;
     }
+    .grid-title::before { content:''; width:3px; height:13px; border-radius:999px; background:var(--gold); flex-shrink:0; }
 
-    .grid-info { font-size:11px; color:rgba(255,255,255,.4); font-weight:500; }
+    .grid-pos {
+      font-size:11px; color:rgba(255,255,255,.8);
+      font-weight:600; text-align:right; line-height:1.5;
+    }
+    .grid-pos strong { color:var(--white); display:block; font-size:12px; }
 
     .grid-hint {
-      padding:0 16px 8px;
-      font-size:10px; color:rgba(255,255,255,.3);
-      display:flex; align-items:center; gap:5px;
+      padding:0 18px 10px;
+      font-size:11px; color:rgba(255,255,255,.8);
+      font-weight:500;
     }
 
-    /* ── PANZOOM CONTAINER ── */
-    .pz-wrap {
-      margin:0 16px 16px;
-      background:#070f22;
-      border-radius:var(--r-md);
-      border:1px solid rgba(255,255,255,.07);
-      overflow:hidden;
-      position:relative;
-      cursor:grab;
-      touch-action:none;
-      user-select:none;
-      -webkit-user-select:none;
-    }
-    .pz-wrap:active { cursor:grabbing; }
-
-    .pz-wrap.wisu  { height:220px; }
-    .pz-wrap.parent { height:180px; }
-
-    @media(min-width:768px) {
-      .pz-wrap.wisu  { height:340px; }
-      .pz-wrap.parent { height:260px; }
-    }
-    @media(min-width:1200px) {
-      .pz-wrap.wisu  { height:420px; }
-      .pz-wrap.parent { height:320px; }
+    /* ══════════════════════════════
+       SVG CONTAINER
+    ══════════════════════════════ */
+    .svg-scroll {
+      overflow-x:auto;
+      overflow-y:hidden;
+      padding:0 16px 16px;
+      -webkit-overflow-scrolling:touch;
     }
 
-    .pz-inner {
-      width:100%; height:100%;
-      transform-origin:0 0;
-      will-change:transform;
-    }
+    .svg-scroll::-webkit-scrollbar { height:4px; }
+    .svg-scroll::-webkit-scrollbar-track { background:rgba(255,255,255,.05); border-radius:2px; }
+    .svg-scroll::-webkit-scrollbar-thumb { background:rgba(251,191,36,.3); border-radius:2px; }
 
-    .pz-inner svg {
+    .svg-scroll svg {
       display:block;
-      width:100%; height:100%;
+      border-radius:10px;
+      /* height auto-calculated by JS */
     }
 
-    /* ── ZOOM CONTROLS ── */
-    .zoom-btns {
-      position:absolute; right:8px; bottom:8px;
-      display:flex; flex-direction:column; gap:4px; z-index:10;
-    }
-    .zoom-btn {
-      width:28px; height:28px;
-      background:rgba(13,30,64,.9); border:1px solid rgba(251,191,36,.3);
-      border-radius:6px; color:var(--gold);
-      font-size:16px; font-weight:700; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      transition:background .2s;
-    }
-    .zoom-btn:hover { background:rgba(251,191,36,.15); }
-    .zoom-btn:active { transform:scale(.95); }
-
-    /* ── EMPTY STATE ── */
-    .grid-empty {
-      height:180px; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:10px;
-      color:rgba(255,255,255,.2); font-size:13px;
-      padding:16px;
-    }
-    .grid-empty-icon { font-size:32px; opacity:.4; }
-
-    /* ── FOOTER ── */
-    .foot { font-size:12px; color:rgba(255,255,255,.2); text-align:center; padding-top:4px; }
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    .foot { font-size:12px; color:rgba(255,255,255,.3); text-align:center; padding-top:4px; }
     .foot a { color:var(--gold); text-decoration:none; }
   </style>
 </head>
@@ -308,20 +312,21 @@
   <div class="card">
     <div class="card-lbl">Cari Kursi</div>
     <div class="hari-wrap">
-      <button class="hari-btn" id="hari1-btn" onclick="selectHari(1)">
-        Hari 1 — Ikhwan
+      <button class="hari-btn" id="h1-btn" onclick="selectHari(1)">
+        Hari 1
+        <small>SD · SMP · SMA Ikhwan</small>
       </button>
-      <button class="hari-btn" id="hari2-btn" onclick="selectHari(2)">
-        Hari 2 — Akhwat
+      <button class="hari-btn" id="h2-btn" onclick="selectHari(2)">
+        Hari 2
+        <small>SD · SMP · SMA Akhwat</small>
       </button>
     </div>
     <div class="inp-row">
       <input class="inp-seat" id="inp-kursi" type="number" min="1" max="800"
-        placeholder="Masukkan nomor kursi..." inputmode="numeric"
-        onkeydown="if(event.key==='Enter') doSearch()">
+        placeholder="Nomor kursi (dari kartu QR)..." inputmode="numeric">
       <button class="btn-cari" id="btn-cari" onclick="doSearch()" disabled>Cari</button>
     </div>
-    <div class="err-msg" id="err-msg">Kursi tidak ditemukan. Pastikan nomor kursi dan hari sudah benar.</div>
+    <div class="err-msg" id="err-msg">Nomor kursi tidak ditemukan. Pastikan hari dan nomor kursi sudah benar.</div>
   </div>
 
   <!-- INFO CARD -->
@@ -330,510 +335,315 @@
     <div class="info-nama" id="info-nama">—</div>
     <div class="info-tags" id="info-tags"></div>
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--c-student)"></div> Kursi Siswa</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--c-ayah)"></div> Kursi Ayah</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--c-ibu)"></div> Kursi Ibu</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--c-seat)"></div> Kursi Lain</div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--c-student)"></div>Kursi Siswa
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--c-ayah)"></div>Kursi Ayah
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--c-ibu)"></div>Kursi Ibu
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--c-seat)"></div>Kursi Lain
+      </div>
     </div>
   </div>
 
-  <!-- GRID SECTIONS -->
-  <div class="grid-sections" id="grid-sections" style="display:none">
+  <!-- GRID SECTIONS (hidden until search) -->
+  <div id="all-grids" style="display:none; flex-direction:column; gap:14px;">
 
     <!-- WISUDAWAN -->
-    <div class="card grid-card" id="wisu-card">
-      <div class="grid-header">
-        <div class="grid-title">🎓 Zona Wisudawan</div>
-        <div class="grid-info" id="wisu-info">—</div>
-      </div>
-      <div class="grid-hint">📱 Pinch zoom · 🖥 Scroll wheel · Drag to pan</div>
-      <div class="pz-wrap wisu" id="pz-wisu">
-        <div class="pz-inner" id="inner-wisu"></div>
-        <div class="zoom-btns">
-          <button class="zoom-btn" onclick="zoomIn('wisu')">+</button>
-          <button class="zoom-btn" onclick="zoomOut('wisu')">−</button>
-          <button class="zoom-btn" onclick="zoomReset('wisu')" style="font-size:11px">⌂</button>
+    <div class="section-wisu">
+      <div class="grid-card">
+        <div class="grid-header">
+          <div class="grid-title">🎓 Zona Wisudawan</div>
+          <div class="grid-pos" id="wisu-pos">—</div>
         </div>
+        <div class="grid-hint">📱 Pinch layar untuk zoom · Geser untuk scroll</div>
+        <div class="svg-scroll" id="scroll-wisu"></div>
       </div>
     </div>
 
-    <!-- PARENT ROW -->
-    <div class="parent-row">
+    <!-- AYAH + IBU -->
+    <div class="section-par">
 
-      <!-- AYAH -->
-      <div class="card grid-card" id="ayah-card">
+      <div class="grid-card">
         <div class="grid-header">
           <div class="grid-title">👨 Zona Ayah</div>
-          <div class="grid-info" id="ayah-info">—</div>
+          <div class="grid-pos" id="ayah-pos">—</div>
         </div>
-        <div class="grid-hint">Pinch zoom · Scroll to zoom · Drag to pan</div>
-        <div class="pz-wrap parent" id="pz-ayah">
-          <div class="pz-inner" id="inner-ayah"></div>
-          <div class="zoom-btns">
-            <button class="zoom-btn" onclick="zoomIn('ayah')">+</button>
-            <button class="zoom-btn" onclick="zoomOut('ayah')">−</button>
-            <button class="zoom-btn" onclick="zoomReset('ayah')" style="font-size:11px">⌂</button>
-          </div>
-        </div>
+        <div class="grid-hint">Blok C & D · Pinch untuk zoom</div>
+        <div class="svg-scroll" id="scroll-ayah"></div>
       </div>
 
-      <!-- IBU -->
-      <div class="card grid-card" id="ibu-card">
+      <div class="grid-card">
         <div class="grid-header">
           <div class="grid-title">👩 Zona Ibu</div>
-          <div class="grid-info" id="ibu-info">—</div>
+          <div class="grid-pos" id="ibu-pos">—</div>
         </div>
-        <div class="grid-hint">Pinch zoom · Scroll to zoom · Drag to pan</div>
-        <div class="pz-wrap parent" id="pz-ibu">
-          <div class="pz-inner" id="inner-ibu"></div>
-          <div class="zoom-btns">
-            <button class="zoom-btn" onclick="zoomIn('ibu')">+</button>
-            <button class="zoom-btn" onclick="zoomOut('ibu')">−</button>
-            <button class="zoom-btn" onclick="zoomReset('ibu')" style="font-size:11px">⌂</button>
-          </div>
-        </div>
+        <div class="grid-hint">Blok A & B · Pinch untuk zoom</div>
+        <div class="svg-scroll" id="scroll-ibu"></div>
       </div>
 
     </div>
   </div>
 
   <div class="foot">&copy; 2026 <a href="#">AL-WILDAN Islamic School</a> — Panitia Wisuda Akbar</div>
-
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════
-//  CONFIG
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
+//  KONFIGURASI
+// ═══════════════════════════════════════════════
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbykuBMalgDRleU3oKr1qPuszJOkRNi4riRyu05a_8hA6la8KHsoouejtcbmX2c1mcXH/exec';
 
-// Blok boundaries [start, end] per hari
+// Blok boundaries per hari (A=leftmost/stage-left, D=rightmost/stage-right)
 const BLOK = {
   1: [
-    { s:1,   e:210, label:'D' },  // 15 rows
-    { s:211, e:406, label:'C' },  // 14 rows
-    { s:407, e:602, label:'B' },  // 14 rows
-    { s:603, e:794, label:'A' },  // 14 rows (partial last)
+    { s:603, e:794, label:'A' },   // 14 rows + partial
+    { s:407, e:602, label:'B' },   // 14 rows
+    { s:211, e:406, label:'C' },   // 14 rows
+    { s:1,   e:210, label:'D' },   // 15 rows
   ],
   2: [
-    { s:1,   e:182, label:'D' },  // 13 rows
-    { s:183, e:364, label:'C' },  // 13 rows
-    { s:365, e:546, label:'B' },  // 13 rows
-    { s:547, e:726, label:'A' },  // 13 rows (partial last)
+    { s:547, e:726, label:'A' },   // 13 rows + partial
+    { s:365, e:546, label:'B' },   // 13 rows
+    { s:183, e:364, label:'C' },   // 13 rows
+    { s:1,   e:182, label:'D' },   // 13 rows
   ]
 };
 
-const MAX_SEAT = { 1: 794, 2: 726 };
-const COLS = 14;       // seats per blok row
-const P_COLS = 28;     // seats per parent row
+// Ayah = blok C & D (lower seat numbers)
+// Ibu  = blok A & B (higher seat numbers)
+const AYAH_BLOK = { 1: [{s:211,e:406,label:'C'},{s:1,e:210,label:'D'}], 2: [{s:183,e:364,label:'C'},{s:1,e:182,label:'D'}] };
+const IBU_BLOK  = { 1: [{s:603,e:794,label:'A'},{s:407,e:602,label:'B'}], 2: [{s:547,e:726,label:'A'},{s:365,e:546,label:'B'}] };
 
-// SVG constants
-const SW = 10, SH = 10, SG = 2, BG = 18;
-const U  = SW + SG;     // unit per seat (12px)
+const MAX_SEAT = { 1:794, 2:726 };
+const COLS = 14;
+
+// SVG seat dims
+const SW=11, SH=11, SG=2, BG=22;
+const U = SW + SG; // 13px per seat unit
 
 // Colors
-const C_SEAT    = '#1a3461';
-const C_STUDENT = '#fbbf24';
-const C_AYAH    = '#10b981';
-const C_IBU     = '#f472b6';
-const C_HL_RIM  = '#ffffff22';
+const C_BG      = '#f1f5f9';
+const C_SEAT    = '#b8c9de';
+const C_STUDENT = '#d97706';
+const C_AYAH    = '#059669';
+const C_IBU     = '#db2777';
+const C_STAGE   = '#0d1e40';
+const C_TEXT    = '#1e3a5f';
 
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 //  STATE
-// ═══════════════════════════════════════════════════
-let allStudents = [];
-let seatMap     = {};
+// ═══════════════════════════════════════════════
+let seatMap = {};
 let selectedHari = 0;
-let panzoomState = {};
 
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 //  LOADING
-// ═══════════════════════════════════════════════════
-const lsBar    = document.getElementById('ls-bar');
-const lsStatus = document.getElementById('ls-status');
-const lsEl     = document.getElementById('ls');
+// ═══════════════════════════════════════════════
+const $id = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 function setProgress(pct, msg) {
-  lsBar.style.width = pct + '%';
-  lsStatus.innerHTML = msg;
+  $id('ls-bar').style.width = pct + '%';
+  $id('ls-status').innerHTML = msg;
 }
-
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function loadData() {
   try {
     setProgress(15, 'Menghubungkan ke server...');
     await sleep(200);
-
     setProgress(35, 'Mengambil data <span>siswa</span>...');
-    const r = await fetch(`${GAS_URL}?action=getAllStudents`);
 
-    setProgress(70, 'Memproses data...');
+    const r = await fetch(`${GAS_URL}?action=getAllStudents`);
+    setProgress(72, 'Memproses data...');
     const d = await r.json();
 
     if (d.status !== 'success' || !d.data.length) throw new Error('empty');
 
-    allStudents = d.data;
-
-    // Build seatMap: key = "hari-kursi"
-    allStudents.forEach(s => {
+    d.data.forEach(s => {
       const key = `${s.hari}-${parseInt(s.nomorKursi)}`;
       seatMap[key] = s;
     });
 
-    setProgress(95, `✓ <span>${allStudents.length}</span> data dimuat`);
+    setProgress(95, `✓ <span>${d.data.length}</span> data siswa dimuat`);
     await sleep(500);
+    $id('ls').classList.add('hide');
 
-    lsEl.classList.add('hide');
-
-  } catch (err) {
+  } catch {
     setProgress(100, '❌ Gagal memuat — <span>refresh halaman</span>');
-    lsBar.style.background = '#ef4444';
+    $id('ls-bar').style.background = '#ef4444';
   }
 }
 
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 //  HARI SELECTOR
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function selectHari(h) {
   selectedHari = h;
-  document.getElementById('hari1-btn').classList.toggle('active', h === 1);
-  document.getElementById('hari2-btn').classList.toggle('active', h === 2);
-  document.getElementById('btn-cari').disabled = false;
-  document.getElementById('inp-kursi').max = MAX_SEAT[h];
-  document.getElementById('err-msg').classList.remove('on');
+  $id('h1-btn').classList.toggle('active', h === 1);
+  $id('h2-btn').classList.toggle('active', h === 2);
+  $id('btn-cari').disabled = false;
+  $id('err-msg').classList.remove('on');
+  $id('inp-kursi').max = MAX_SEAT[h];
+  $id('inp-kursi').focus();
 }
 
-// ═══════════════════════════════════════════════════
-//  SEARCH
-// ═══════════════════════════════════════════════════
-function doSearch() {
-  const errEl = document.getElementById('err-msg');
-  errEl.classList.remove('on');
+$id('inp-kursi').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
 
+// ═══════════════════════════════════════════════
+//  SEARCH
+// ═══════════════════════════════════════════════
+function doSearch() {
+  const errEl = $id('err-msg');
+  errEl.classList.remove('on');
   if (!selectedHari) return;
 
-  const seatNum = parseInt(document.getElementById('inp-kursi').value);
+  const seatNum = parseInt($id('inp-kursi').value);
   if (!seatNum || seatNum < 1 || seatNum > MAX_SEAT[selectedHari]) {
-    errEl.classList.add('on');
-    return;
+    errEl.classList.add('on'); return;
   }
 
-  const key = `${selectedHari}-${seatNum}`;
-  const student = seatMap[key];
+  const student = seatMap[`${selectedHari}-${seatNum}`];
+  if (!student) { errEl.classList.add('on'); return; }
 
-  if (!student) {
-    errEl.classList.add('on');
-    return;
-  }
-
-  showResult(student, seatNum);
+  renderResult(student, seatNum);
 }
 
-function showResult(student, seatNum) {
+function renderResult(student, seat) {
   // Info card
-  document.getElementById('info-nama').textContent = student.nama;
-  const tags = document.getElementById('info-tags');
-  tags.innerHTML =
-    tag(`Kursi ${seatNum}`) +
-    tag(student.cabang) +
-    tag(student.jenjang) +
-    tag(student.kelas) +
-    tag(student.hari === 1 ? 'Hari 1 — Ikhwan' : 'Hari 2 — Akhwat');
-  document.getElementById('info-card').classList.add('on');
+  $id('info-nama').textContent = student.nama;
+  $id('info-tags').innerHTML =
+    tag(`Kursi ${seat}`) + tag(student.cabang) +
+    tag(student.jenjang) + tag(student.kelas) +
+    tag(seat <= MAX_SEAT[1]/2 ? 'Sisi Kanan Panggung' : 'Sisi Kiri Panggung');
+  $id('info-card').classList.add('on');
 
-  // Compute positions
-  const wisuPos = getWisuPos(seatNum, selectedHari);
-  const parRow  = Math.ceil(seatNum / P_COLS);
-  const parCol  = seatNum - (parRow - 1) * P_COLS;
+  // Position info
+  const wp = getBlokPos(seat, BLOK[selectedHari]);
+  const ap = getBlokPos(seat, AYAH_BLOK[selectedHari]);
+  const ip = getBlokPos(seat, IBU_BLOK[selectedHari]);
 
-  // Update section headers
-  document.getElementById('wisu-info').textContent =
-    `Blok ${wisuPos.label} · Baris ${wisuPos.row} · Posisi ${wisuPos.col} dari kiri`;
-  document.getElementById('ayah-info').textContent =
-    `Baris ${parRow} · Posisi ${parCol} dari kiri`;
-  document.getElementById('ibu-info').textContent =
-    `Baris ${parRow} · Posisi ${parCol} dari kiri`;
+  $id('wisu-pos').innerHTML = `<strong>Blok ${wp.label} · Baris ${wp.row}</strong>Kursi ke-${wp.colFromRight} dari kanan`;
+  $id('ayah-pos').innerHTML = ap
+    ? `<strong>Blok ${ap.label} · Baris ${ap.row}</strong>Kursi ke-${ap.colFromRight} dari kanan`
+    : `<strong>Lihat Zona Ayah</strong>Kursi ${seat}`;
+  $id('ibu-pos').innerHTML  = ip
+    ? `<strong>Blok ${ip.label} · Baris ${ip.row}</strong>Kursi ke-${ip.colFromRight} dari kanan`
+    : `<strong>Lihat Zona Ibu</strong>Kursi ${seat}`;
 
-  // Show grid sections
-  document.getElementById('grid-sections').style.display = 'flex';
-  document.getElementById('grid-sections').style.flexDirection = 'column';
+  // Show grids
+  const grids = $id('all-grids');
+  grids.style.display = 'flex';
 
   // Build SVGs
-  buildWisuSVG(selectedHari, seatNum);
-  buildParentSVG('ayah', selectedHari, seatNum);
-  buildParentSVG('ibu',  selectedHari, seatNum);
+  buildSVG('scroll-wisu', BLOK[selectedHari], seat, C_STUDENT, true);
+  buildSVG('scroll-ayah', AYAH_BLOK[selectedHari], seat, C_AYAH,    false);
+  buildSVG('scroll-ibu',  IBU_BLOK[selectedHari],  seat, C_IBU,     false);
 
   // Scroll to result
-  setTimeout(() => {
-    document.getElementById('info-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 100);
+  setTimeout(() => $id('info-card').scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
 }
 
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 //  POSITION CALCULATOR
-// ═══════════════════════════════════════════════════
-function getWisuPos(seat, hari) {
-  const bloks = BLOK[hari];
+// ═══════════════════════════════════════════════
+function getBlokPos(seat, bloks) {
   for (const b of bloks) {
     if (seat >= b.s && seat <= b.e) {
-      const offset = seat - b.s;
-      const row = Math.floor(offset / COLS) + 1;
-      const col = (offset % COLS) + 1;
-      return { label: b.label, row, col };
+      const offset     = seat - b.s;
+      const row        = Math.floor(offset / COLS) + 1;
+      // Within blok: highest seat = leftmost, lowest = rightmost
+      // colFromRight: offset%COLS=0 → rightmost → colFromRight=1
+      const colFromRight = (offset % COLS) + 1;
+      return { label: b.label, row, colFromRight };
     }
   }
-  return { label: '?', row: 0, col: 0 };
+  return null;
 }
 
-// ═══════════════════════════════════════════════════
-//  SVG BUILDERS
-// ═══════════════════════════════════════════════════
-function buildWisuSVG(hari, hlSeat) {
-  const bloks = BLOK[hari];
-  const STAGE_H = 28, LABEL_H = 14, TOP = STAGE_H + LABEL_H;
+// ═══════════════════════════════════════════════
+//  SVG BUILDER
+// ═══════════════════════════════════════════════
+function buildSVG(containerId, bloks, hlSeat, hlColor, showStage) {
+  const STAGE_H = showStage ? 30 : 0;
+  const LABEL_H = 16;
+  const TOP     = STAGE_H + LABEL_H;
+  const PAD     = 10; // padding inside SVG
 
-  // Calculate dimensions
-  const blokW   = COLS * U;
-  const totalW  = bloks.length * blokW + (bloks.length - 1) * BG;
+  const blokW  = COLS * U;
+  const totalW = bloks.length * blokW + (bloks.length - 1) * BG + PAD * 2;
+
   const maxRows = Math.max(...bloks.map(b => Math.ceil((b.e - b.s + 1) / COLS)));
-  const totalH  = TOP + maxRows * U + 8;
+  const totalH  = TOP + maxRows * U + PAD * 2;
 
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW} ${totalH}" preserveAspectRatio="xMidYMid meet">`;
+  let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${totalW}" height="${totalH}" viewBox="0 0 ${totalW} ${totalH}" style="background:${C_BG};border-radius:10px">`;
 
-  // Stage
-  svg += `<rect x="0" y="2" width="${totalW}" height="${STAGE_H - 4}" rx="4" fill="#0d1e40"/>`;
-  svg += `<text x="${totalW/2}" y="${STAGE_H - 4}" text-anchor="middle" fill="#fbbf24" font-size="9" font-family="Plus Jakarta Sans,sans-serif" font-weight="700">▲ MAIN STAGE ▲</text>`;
+  // Stage bar (wisudawan only)
+  if (showStage) {
+    s += `<rect x="${PAD}" y="${PAD}" width="${totalW - PAD*2}" height="${STAGE_H - 6}" rx="5" fill="${C_STAGE}"/>`;
+    s += `<text x="${totalW/2}" y="${PAD + STAGE_H - 14}" text-anchor="middle" fill="#fbbf24" font-size="9.5" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" letter-spacing="1">▲  MAIN STAGE  ▲</text>`;
+  }
 
   bloks.forEach((blok, bi) => {
-    const bx = bi * (blokW + BG);
+    // Bloks are rendered right-to-left visually (Blok D rightmost in data, displayed rightmost on screen)
+    // bloks array order: [A, B, C, D] for wisudawan → rendered left to right
+    const bx = PAD + bi * (blokW + BG);
 
     // Blok label
-    svg += `<text x="${bx + blokW/2}" y="${STAGE_H + 11}" text-anchor="middle" fill="#fbbf24" font-size="8" font-family="Plus Jakarta Sans,sans-serif" font-weight="700">BLOK ${blok.label}</text>`;
+    s += `<text x="${bx + blokW/2}" y="${STAGE_H + PAD + 11}" text-anchor="middle" fill="${C_TEXT}" font-size="8.5" font-family="Plus Jakarta Sans,sans-serif" font-weight="800">BLOK ${blok.label}</text>`;
 
-    // Seats
-    for (let seat = blok.s; seat <= blok.e; seat++) {
-      const offset = seat - blok.s;
-      const col = offset % COLS;
-      const row = Math.floor(offset / COLS);
-      const x = bx + col * U;
-      const y = TOP + row * U;
+    // Seats — within each blok, highest seat number = leftmost column
+    // So seat blok.s (lowest) = rightmost col (COLS-1), seat blok.e (highest) = leftmost col (0)
+    // For seat S: offset = S - blok.s
+    //   col from left = COLS - 1 - (offset % COLS)  ← reversed
+    //   row           = Math.floor(offset / COLS)
+
+    const seatsInBlok = blok.e - blok.s + 1;
+    for (let i = 0; i < seatsInBlok; i++) {
+      const seat     = blok.s + i;
+      const row      = Math.floor(i / COLS);
+      const colFromL = COLS - 1 - (i % COLS); // reversed: highest seat = leftmost
+
+      const x = bx + colFromL * U;
+      const y = TOP + PAD + row * U;
 
       const isHL = seat === hlSeat;
-      const fill = isHL ? C_STUDENT : C_SEAT;
-      const rx   = isHL ? '2.5' : '1.5';
+      const fill = isHL ? hlColor : C_SEAT;
+      const rx   = isHL ? '3' : '2';
 
-      svg += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${rx}" fill="${fill}"`;
-      if (isHL) svg += ` stroke="#ffffff" stroke-width="1.5"`;
-      svg += `/>`;
+      s += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${rx}" fill="${fill}"`;
+      if (isHL) s += ` stroke="white" stroke-width="1.5"`;
+      s += `/>`;
 
-      // Highlight number label
+      // Seat number label on highlighted seat
       if (isHL) {
-        svg += `<text x="${x + SW/2}" y="${y + SH - 2}" text-anchor="middle" fill="${C_SEAT}" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
+        s += `<text x="${x + SW/2}" y="${y + SH - 2.5}" text-anchor="middle" fill="white" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
       }
     }
 
-    // Blok border (subtle)
-    const brows = Math.ceil((blok.e - blok.s + 1) / COLS);
-    svg += `<rect x="${bx - 1}" y="${TOP - 1}" width="${blokW + 2}" height="${brows * U + 2}" rx="3" fill="none" stroke="rgba(251,191,36,0.1)" stroke-width="1"/>`;
+    // Blok outline
+    const bRows = Math.ceil((blok.e - blok.s + 1) / COLS);
+    s += `<rect x="${bx - 1}" y="${TOP + PAD - 1}" width="${blokW + 2}" height="${bRows * U + 2}" rx="4" fill="none" stroke="${C_TEXT}22" stroke-width="1"/>`;
   });
 
-  svg += `</svg>`;
+  s += `</svg>`;
 
-  const inner = document.getElementById('inner-wisu');
-  inner.innerHTML = svg;
-  initPanZoom('wisu');
+  const container = $id(containerId);
+  container.innerHTML = s;
 }
 
-function buildParentSVG(zone, hari, hlSeat) {
-  const maxSeat = MAX_SEAT[hari];
-  const totalRows = Math.ceil(maxSeat / P_COLS);
-  const LABEL_H = 18;
-
-  const totalW = P_COLS * U;
-  const totalH = LABEL_H + totalRows * U + 4;
-
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW} ${totalH}" preserveAspectRatio="xMidYMid meet">`;
-
-  // Label
-  const zLabel = zone === 'ayah' ? '👨 ZONA AYAH' : '👩 ZONA IBU';
-  const zColor = zone === 'ayah' ? C_AYAH : C_IBU;
-  svg += `<text x="${totalW/2}" y="13" text-anchor="middle" fill="${zColor}" font-size="9" font-family="Plus Jakarta Sans,sans-serif" font-weight="700">${zLabel}</text>`;
-
-  // Seats
-  for (let seat = 1; seat <= maxSeat; seat++) {
-    const offset = seat - 1;
-    const col = offset % P_COLS;
-    const row = Math.floor(offset / P_COLS);
-    const x = col * U;
-    const y = LABEL_H + row * U;
-
-    const isHL = seat === hlSeat;
-    const fill = isHL ? zColor : C_SEAT;
-    const rx   = isHL ? '2.5' : '1.5';
-
-    svg += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${rx}" fill="${fill}"`;
-    if (isHL) svg += ` stroke="#ffffff" stroke-width="1.5"`;
-    svg += `/>`;
-
-    if (isHL) {
-      svg += `<text x="${x + SW/2}" y="${y + SH - 2}" text-anchor="middle" fill="${C_SEAT}" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
-    }
-  }
-
-  svg += `</svg>`;
-
-  const inner = document.getElementById(`inner-${zone}`);
-  inner.innerHTML = svg;
-  initPanZoom(zone);
-}
-
-// ═══════════════════════════════════════════════════
-//  PANZOOM
-// ═══════════════════════════════════════════════════
-function initPanZoom(id) {
-  const wrapper = document.getElementById(`pz-${id}`);
-  const inner   = document.getElementById(`inner-${id}`);
-
-  let scale = 1, tx = 0, ty = 0;
-  let lastDist = null;
-  let dragging = false, lastX = 0, lastY = 0;
-  let lastTouches = [];
-
-  const MIN_SCALE = 0.3, MAX_SCALE = 10;
-
-  function clamp(v, a, b) { return Math.min(Math.max(v, a), b); }
-
-  function apply() {
-    inner.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
-    inner.style.transformOrigin = '0 0';
-  }
-
-  function getDist(t) {
-    return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
-  }
-
-  // Touch
-  wrapper.addEventListener('touchstart', e => {
-    e.preventDefault();
-    lastTouches = Array.from(e.touches);
-    if (e.touches.length === 1) {
-      dragging = true;
-      lastX = e.touches[0].clientX;
-      lastY = e.touches[0].clientY;
-    }
-    if (e.touches.length === 2) {
-      lastDist = getDist(e.touches);
-    }
-  }, { passive: false });
-
-  wrapper.addEventListener('touchmove', e => {
-    e.preventDefault();
-    if (e.touches.length === 2) {
-      const dist = getDist(e.touches);
-      if (lastDist) {
-        const factor = dist / lastDist;
-        // Zoom around center of two fingers
-        const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-        const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-        const rect = wrapper.getBoundingClientRect();
-        const px = cx - rect.left;
-        const py = cy - rect.top;
-
-        const newScale = clamp(scale * factor, MIN_SCALE, MAX_SCALE);
-        const ratio = newScale / scale;
-        tx = px - ratio * (px - tx);
-        ty = py - ratio * (py - ty);
-        scale = newScale;
-      }
-      lastDist = dist;
-
-      // Also handle pan with 2 fingers
-      if (lastTouches.length === 2) {
-        const prevMx = (lastTouches[0].clientX + lastTouches[1].clientX) / 2;
-        const prevMy = (lastTouches[0].clientY + lastTouches[1].clientY) / 2;
-        const curMx  = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-        const curMy  = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-        tx += curMx - prevMx;
-        ty += curMy - prevMy;
-      }
-
-    } else if (e.touches.length === 1 && dragging) {
-      tx += e.touches[0].clientX - lastX;
-      ty += e.touches[0].clientY - lastY;
-      lastX = e.touches[0].clientX;
-      lastY = e.touches[0].clientY;
-    }
-    lastTouches = Array.from(e.touches);
-    apply();
-  }, { passive: false });
-
-  wrapper.addEventListener('touchend', e => {
-    lastTouches = Array.from(e.touches);
-    if (e.touches.length < 2) lastDist = null;
-    if (e.touches.length === 0) dragging = false;
-  });
-
-  // Mouse (desktop)
-  wrapper.addEventListener('mousedown', e => {
-    dragging = true;
-    lastX = e.clientX; lastY = e.clientY;
-    wrapper.style.cursor = 'grabbing';
-  });
-  wrapper.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    tx += e.clientX - lastX;
-    ty += e.clientY - lastY;
-    lastX = e.clientX; lastY = e.clientY;
-    apply();
-  });
-  const stopDrag = () => { dragging = false; wrapper.style.cursor = 'grab'; };
-  wrapper.addEventListener('mouseup', stopDrag);
-  wrapper.addEventListener('mouseleave', stopDrag);
-
-  // Wheel (desktop zoom)
-  wrapper.addEventListener('wheel', e => {
-    e.preventDefault();
-    const rect = wrapper.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
-    const factor = e.deltaY < 0 ? 1.12 : 0.89;
-    const newScale = clamp(scale * factor, MIN_SCALE, MAX_SCALE);
-    const ratio = newScale / scale;
-    tx = px - ratio * (px - tx);
-    ty = py - ratio * (py - ty);
-    scale = newScale;
-    apply();
-  }, { passive: false });
-
-  // Store state for zoom buttons
-  panzoomState[id] = { scale, tx, ty, apply, clamp, wrapper, inner, MIN_SCALE, MAX_SCALE };
-
-  // Refresh state ref on change
-  const origApply = apply;
-  panzoomState[id].getState = () => ({ scale, tx, ty });
-  panzoomState[id].setState = (s, x, y) => { scale = s; tx = x; ty = y; origApply(); };
-
-  apply();
-}
-
-function zoomIn(id)    { const st = panzoomState[id]; if(!st) return; const s = st.getState(); st.setState(Math.min(s.scale*1.3, 10), s.tx, s.ty); }
-function zoomOut(id)   { const st = panzoomState[id]; if(!st) return; const s = st.getState(); st.setState(Math.max(s.scale*0.77, 0.3), s.tx, s.ty); }
-function zoomReset(id) { const st = panzoomState[id]; if(!st) return; st.setState(1, 0, 0); }
-
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 //  HELPERS
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 const tag = t => `<span class="info-tag">${t}</span>`;
 
-// Input: press Enter
-document.getElementById('inp-kursi').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doSearch();
-});
-
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 //  START
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
 loadData();
 </script>
 </body>
