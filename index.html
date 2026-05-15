@@ -7,189 +7,103 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:#060e20; --navy:#0d1e40; --navy-lt:#1a3461;
-      --gold:#fbbf24; --gold-lt:#fde68a; --gold-dk:#b45309;
-      --green:#059669; --pink:#db2777; --white:#ffffff;
-      --glass:rgba(255,255,255,0.04); --glass-bd:rgba(251,191,36,0.18);
-      --r-xl:24px; --r-lg:16px; --r-md:12px;
-      --c-bg:#f1f5f9; --c-seat:#b8c9de;
-      --c-student:#d97706; --c-ayah:#059669; --c-ibu:#db2777;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#060e20;--navy:#0d1e40;--gold:#fbbf24;--gold-lt:#fde68a;--gold-dk:#b45309;
+      --green:#059669;--pink:#db2777;--white:#ffffff;
+      --glass:rgba(255,255,255,0.04);--glass-bd:rgba(251,191,36,0.18);
+      --r-xl:24px;--r-lg:16px;--r-md:12px;
+      --c-bg:#f1f5f9;--c-seat:#b8c9de;--c-stu:#d97706;--c-ayah:#059669;--c-ibu:#db2777;
     }
-    html { scroll-behavior:smooth; }
-    body {
-      font-family:'Plus Jakarta Sans',sans-serif;
-      background:var(--bg); min-height:100svh;
-      color:var(--white); overflow-x:hidden;
-    }
-    body::before {
-      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background-image:
-        repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.016) 39px,rgba(255,255,255,.016) 40px),
-        repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,.016) 39px,rgba(255,255,255,.016) 40px);
-    }
-    body::after {
-      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background:
-        radial-gradient(ellipse 80% 55% at 85% -5%, rgba(251,191,36,.1) 0%,transparent 65%),
-        radial-gradient(ellipse 60% 45% at 15% 105%, rgba(59,130,246,.1) 0%,transparent 60%);
-    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);min-height:100svh;color:#fff;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.016) 39px,rgba(255,255,255,.016) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,.016) 39px,rgba(255,255,255,.016) 40px);}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 80% 55% at 85% -5%,rgba(251,191,36,.1) 0%,transparent 65%),radial-gradient(ellipse 60% 45% at 15% 105%,rgba(59,130,246,.1) 0%,transparent 60%);}
 
-    /* ── LOADING ── */
-    .ls {
-      position:fixed; inset:0; z-index:9999; background:var(--bg);
-      display:flex; flex-direction:column; align-items:center;
-      justify-content:center; gap:24px; padding:32px;
-      transition:opacity .5s, visibility .5s;
-    }
-    .ls.hide { opacity:0; visibility:hidden; pointer-events:none; }
-    .ls-badge {
-      display:inline-flex; align-items:center; gap:7px;
-      background:rgba(251,191,36,.1); border:1px solid rgba(251,191,36,.28);
-      border-radius:999px; padding:5px 16px;
-      font-size:10px; font-weight:700; letter-spacing:2px;
-      text-transform:uppercase; color:var(--gold);
-    }
-    .ls-badge i { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pdot 2s ease-in-out infinite; }
+    /* LOADING */
+    .ls{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:32px;transition:opacity .5s,visibility .5s;}
+    .ls.hide{opacity:0;visibility:hidden;pointer-events:none;}
+    .ls-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.28);border-radius:999px;padding:5px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+    .ls-badge i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pdot 2s ease-in-out infinite;}
     @keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 7px var(--gold);}50%{opacity:.3;box-shadow:none;}}
-    .ls-title { font-size:26px; font-weight:900; text-align:center; line-height:1.2; }
-    .ls-title em { font-style:normal; color:var(--gold); }
-    .ls-prog-wrap { width:100%; max-width:280px; background:rgba(255,255,255,.07); border-radius:999px; height:6px; overflow:hidden; }
-    .ls-prog-bar  { height:100%; width:0%; background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt)); border-radius:999px; transition:width .4s ease; box-shadow:0 0 12px rgba(251,191,36,.5); }
-    .ls-status    { font-size:12px; font-weight:600; color:rgba(255,255,255,.6); text-align:center; }
-    .ls-status span { color:var(--gold); }
+    .ls-title{font-size:26px;font-weight:900;text-align:center;line-height:1.2;}
+    .ls-title em{font-style:normal;color:var(--gold);}
+    .ls-prog-wrap{width:100%;max-width:280px;background:rgba(255,255,255,.07);border-radius:999px;height:6px;overflow:hidden;}
+    .ls-prog-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt));border-radius:999px;transition:width .4s ease;box-shadow:0 0 12px rgba(251,191,36,.5);}
+    .ls-status{font-size:12px;font-weight:600;color:rgba(255,255,255,.6);text-align:center;}
+    .ls-status span{color:var(--gold);}
 
-    /* ── WRAP ── */
-    .wrap {
-      position:relative; z-index:1; width:100%; max-width:580px;
-      margin:0 auto; padding:0 16px 64px;
-      display:flex; flex-direction:column; gap:14px;
-    }
-    @media(min-width:768px)  { .wrap { max-width:860px;  padding:0 32px 64px; gap:18px; } }
-    @media(min-width:1280px) { .wrap { max-width:1160px; padding:0 48px 64px; } }
+    /* WRAP */
+    .wrap{position:relative;z-index:1;width:100%;max-width:580px;margin:0 auto;padding:0 16px 64px;display:flex;flex-direction:column;gap:14px;}
+    @media(min-width:768px){.wrap{max-width:900px;padding:0 32px 64px;gap:18px;}}
+    @media(min-width:1280px){.wrap{max-width:1200px;padding:0 48px 64px;}}
 
-    /* ── HEADER ── */
-    .hdr { text-align:center; padding:40px 0 4px; }
-    @media(min-width:768px) { .hdr { padding:56px 0 8px; } }
-    .hdr-badge {
-      display:inline-flex; align-items:center; gap:7px;
-      background:rgba(251,191,36,.1); border:1px solid rgba(251,191,36,.28);
-      border-radius:999px; padding:5px 16px; margin-bottom:16px;
-      font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold);
-    }
-    .hdr-badge i { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pdot 2s ease-in-out infinite; }
-    .hdr h1 { font-size:26px; font-weight:900; line-height:1.15; letter-spacing:-.4px; }
-    @media(min-width:768px)  { .hdr h1 { font-size:34px; } }
-    @media(min-width:1280px) { .hdr h1 { font-size:40px; } }
-    .hdr h1 em { font-style:normal; color:var(--gold); }
-    .hdr p { margin-top:8px; font-size:13px; color:rgba(255,255,255,.6); font-weight:500; }
-    .hdr-rule { width:40px; height:2px; margin:16px auto 0; border-radius:999px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    /* HEADER */
+    .hdr{text-align:center;padding:40px 0 4px;}
+    @media(min-width:768px){.hdr{padding:56px 0 8px;}}
+    .hdr-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.28);border-radius:999px;padding:5px 16px;margin-bottom:16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+    .hdr-badge i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pdot 2s ease-in-out infinite;}
+    .hdr h1{font-size:26px;font-weight:900;line-height:1.15;letter-spacing:-.4px;}
+    @media(min-width:768px){.hdr h1{font-size:34px;}}
+    @media(min-width:1280px){.hdr h1{font-size:40px;}}
+    .hdr h1 em{font-style:normal;color:var(--gold);}
+    .hdr p{margin-top:8px;font-size:13px;color:rgba(255,255,255,.6);font-weight:500;}
+    .hdr-rule{width:40px;height:2px;margin:16px auto 0;border-radius:999px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 
-    /* ── CARD ── */
-    .card {
-      width:100%; background:var(--glass); border:1px solid var(--glass-bd);
-      border-radius:var(--r-xl); padding:20px 18px;
-      backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
-      box-shadow:0 20px 48px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
-    }
-    @media(min-width:768px) { .card { padding:24px 24px; } }
-    .card-lbl {
-      font-size:10px; font-weight:700; letter-spacing:1.8px;
-      text-transform:uppercase; color:var(--gold); margin-bottom:14px;
-      display:flex; align-items:center; gap:8px;
-    }
-    .card-lbl::before { content:''; width:3px; height:14px; border-radius:999px; background:var(--gold); flex-shrink:0; }
+    /* CARD */
+    .card{width:100%;background:var(--glass);border:1px solid var(--glass-bd);border-radius:var(--r-xl);padding:20px 18px;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 20px 48px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.07);}
+    @media(min-width:768px){.card{padding:24px 24px;}}
+    .card-lbl{font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+    .card-lbl::before{content:'';width:3px;height:14px;border-radius:999px;background:var(--gold);flex-shrink:0;}
 
-    /* ── SEARCH ── */
-    .hari-wrap { display:flex; gap:8px; margin-bottom:14px; }
-    .hari-btn {
-      flex:1; padding:13px 8px; border-radius:var(--r-md);
-      border:1.5px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      color:rgba(255,255,255,.5); font-family:inherit;
-      font-size:14px; font-weight:700; cursor:pointer;
-      transition:all .2s; line-height:1.3;
-    }
-    .hari-btn small { display:block; font-size:10px; font-weight:500; opacity:.7; margin-top:2px; }
-    .hari-btn.active { border-color:var(--gold); background:rgba(251,191,36,.12); color:var(--gold); box-shadow:0 0 0 3px rgba(251,191,36,.1); }
-    .hari-btn:hover:not(.active) { border-color:rgba(255,255,255,.25); color:rgba(255,255,255,.8); }
-    .inp-row { display:flex; gap:10px; }
-    .inp-seat {
-      flex:1; background:rgba(255,255,255,.07);
-      border:1.5px solid rgba(255,255,255,.12);
-      border-radius:var(--r-md); color:var(--white);
-      font-family:inherit; font-size:16px; font-weight:600;
-      padding:14px 16px; outline:none;
-      transition:border-color .2s, background .2s, box-shadow .2s;
-      -webkit-appearance:none; appearance:none;
-    }
-    .inp-seat::placeholder { color:rgba(255,255,255,.3); font-weight:500; }
-    .inp-seat:focus { border-color:rgba(251,191,36,.6); background:rgba(255,255,255,.1); box-shadow:0 0 0 3px rgba(251,191,36,.12); }
-    .btn-cari {
-      padding:14px 22px; background:var(--gold); border:none;
-      border-radius:var(--r-md); font-family:inherit;
-      font-size:15px; font-weight:800; color:var(--navy);
-      cursor:pointer; transition:transform .18s, opacity .18s; white-space:nowrap;
-    }
-    .btn-cari:active { transform:scale(.97); }
-    .btn-cari:disabled { opacity:.35; cursor:not-allowed; transform:none; }
-    .err-msg { font-size:12px; color:#fca5a5; margin-top:10px; display:none; font-weight:500; }
-    .err-msg.on { display:block; }
+    /* SEARCH */
+    .hari-wrap{display:flex;gap:8px;margin-bottom:14px;}
+    .hari-btn{flex:1;padding:13px 8px;border-radius:var(--r-md);border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;line-height:1.3;}
+    .hari-btn small{display:block;font-size:10px;font-weight:500;opacity:.7;margin-top:2px;}
+    .hari-btn.active{border-color:var(--gold);background:rgba(251,191,36,.12);color:var(--gold);box-shadow:0 0 0 3px rgba(251,191,36,.1);}
+    .hari-btn:hover:not(.active){border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.8);}
+    .inp-row{display:flex;gap:10px;}
+    .inp-seat{flex:1;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:var(--r-md);color:#fff;font-family:inherit;font-size:16px;font-weight:600;padding:14px 16px;outline:none;transition:border-color .2s,background .2s,box-shadow .2s;-webkit-appearance:none;appearance:none;}
+    .inp-seat::placeholder{color:rgba(255,255,255,.3);font-weight:500;}
+    .inp-seat:focus{border-color:rgba(251,191,36,.6);background:rgba(255,255,255,.1);box-shadow:0 0 0 3px rgba(251,191,36,.12);}
+    .btn-cari{padding:14px 22px;background:var(--gold);border:none;border-radius:var(--r-md);font-family:inherit;font-size:15px;font-weight:800;color:var(--navy,#0d1e40);cursor:pointer;transition:transform .18s,opacity .18s;white-space:nowrap;}
+    .btn-cari:active{transform:scale(.97);}
+    .btn-cari:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+    .err-msg{font-size:12px;color:#fca5a5;margin-top:10px;display:none;font-weight:500;}
+    .err-msg.on{display:block;}
 
-    /* ── INFO CARD ── */
-    .info-card { display:none; animation:fadeUp .3s ease; }
-    .info-card.on { display:block; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;} }
-    .info-nama { font-size:20px; font-weight:800; margin-bottom:10px; line-height:1.2; }
-    @media(min-width:768px) { .info-nama { font-size:24px; } }
-    .info-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
-    .info-tag {
-      background:rgba(251,191,36,.12); border:1px solid rgba(251,191,36,.3);
-      border-radius:999px; padding:4px 13px;
-      font-size:11px; font-weight:700; color:var(--gold);
-    }
-    .legend { display:flex; flex-wrap:wrap; gap:12px; padding-top:14px; border-top:1px solid rgba(255,255,255,.08); }
-    .legend-item { display:flex; align-items:center; gap:7px; font-size:12px; color:rgba(255,255,255,.8); font-weight:600; }
-    .legend-dot  { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
+    /* INFO CARD */
+    .info-card{display:none;animation:fadeUp .3s ease;}
+    .info-card.on{display:block;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+    .info-nama{font-size:20px;font-weight:800;margin-bottom:10px;line-height:1.2;}
+    @media(min-width:768px){.info-nama{font-size:24px;}}
+    .info-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+    .info-tag{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);border-radius:999px;padding:4px 13px;font-size:11px;font-weight:700;color:var(--gold);}
+    .legend{display:flex;flex-wrap:wrap;gap:12px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);}
+    .legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.8);font-weight:600;}
+    .legend-dot{width:14px;height:14px;border-radius:3px;flex-shrink:0;}
 
-    /* ── GRID CARD ── */
-    .grid-card {
-      width:100%; background:var(--glass); border:1px solid var(--glass-bd);
-      border-radius:var(--r-xl);
-      backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
-      box-shadow:0 20px 48px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
-      overflow:hidden;
-    }
-    .grid-header {
-      display:flex; align-items:flex-start; justify-content:space-between;
-      gap:8px; padding:16px 18px 10px;
-    }
-    @media(min-width:768px) { .grid-header { padding:18px 20px 12px; } }
-    .grid-title {
-      font-size:11px; font-weight:700; letter-spacing:1.6px;
-      text-transform:uppercase; color:var(--gold);
-      display:flex; align-items:center; gap:7px;
-    }
-    .grid-title::before { content:''; width:3px; height:13px; border-radius:999px; background:var(--gold); flex-shrink:0; }
-    .grid-pos { font-size:11px; color:rgba(255,255,255,.8); font-weight:600; text-align:right; line-height:1.5; }
-    .grid-pos strong { color:var(--white); display:block; font-size:12px; }
-    .grid-hint { padding:0 18px 10px; font-size:11px; color:rgba(255,255,255,.8); font-weight:500; }
+    /* GRID CARD */
+    .grid-card{width:100%;background:var(--glass);border:1px solid var(--glass-bd);border-radius:var(--r-xl);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 20px 48px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.07);overflow:hidden;}
+    .grid-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:16px 18px 10px;}
+    @media(min-width:768px){.grid-header{padding:18px 20px 12px;}}
+    .grid-title{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:7px;}
+    .grid-title::before{content:'';width:3px;height:13px;border-radius:999px;background:var(--gold);flex-shrink:0;}
+    .grid-pos{font-size:11px;color:rgba(255,255,255,.8);font-weight:600;text-align:right;line-height:1.5;}
+    .grid-pos strong{color:#fff;display:block;font-size:12px;}
+    .grid-hint{padding:0 18px 10px;font-size:11px;color:rgba(255,255,255,.8);font-weight:500;}
+    .svg-scroll{overflow-x:auto;overflow-y:hidden;padding:0 16px 16px;-webkit-overflow-scrolling:touch;}
+    .svg-scroll::-webkit-scrollbar{height:4px;}
+    .svg-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:2px;}
+    .svg-scroll::-webkit-scrollbar-thumb{background:rgba(251,191,36,.3);border-radius:2px;}
+    .svg-scroll svg{display:block;border-radius:10px;}
 
-    /* ── SVG SCROLL ── */
-    .svg-scroll {
-      overflow-x:auto; overflow-y:hidden;
-      padding:0 16px 16px;
-      -webkit-overflow-scrolling:touch;
-    }
-    .svg-scroll::-webkit-scrollbar { height:4px; }
-    .svg-scroll::-webkit-scrollbar-track { background:rgba(255,255,255,.05); border-radius:2px; }
-    .svg-scroll::-webkit-scrollbar-thumb { background:rgba(251,191,36,.3); border-radius:2px; }
-    .svg-scroll svg { display:block; border-radius:10px; }
-
-    /* ── FOOTER ── */
-    .foot { font-size:12px; color:rgba(255,255,255,.3); text-align:center; padding-top:4px; }
-    .foot a { color:var(--gold); text-decoration:none; }
+    /* FOOTER */
+    .foot{font-size:12px;color:rgba(255,255,255,.3);text-align:center;padding-top:4px;}
+    .foot a{color:var(--gold);text-decoration:none;}
   </style>
 </head>
 <body>
@@ -202,7 +116,6 @@
 </div>
 
 <div class="wrap">
-
   <div class="hdr">
     <div class="hdr-badge"><i></i> Seating Arrangement</div>
     <h1>Denah <em>Kursi</em> Wisuda<br>Akbar AL-WILDAN 2026</h1>
@@ -214,16 +127,11 @@
   <div class="card">
     <div class="card-lbl">Cari Kursi</div>
     <div class="hari-wrap">
-      <button class="hari-btn" id="h1-btn" onclick="selectHari(1)">
-        Hari 1<small>SD · SMP · SMA Ikhwan</small>
-      </button>
-      <button class="hari-btn" id="h2-btn" onclick="selectHari(2)">
-        Hari 2<small>SD · SMP · SMA Akhwat</small>
-      </button>
+      <button class="hari-btn" id="h1-btn" onclick="selectHari(1)">Hari 1<small>SD · SMP · SMA Ikhwan</small></button>
+      <button class="hari-btn" id="h2-btn" onclick="selectHari(2)">Hari 2<small>SD · SMP · SMA Akhwat</small></button>
     </div>
     <div class="inp-row">
-      <input class="inp-seat" id="inp-kursi" type="number" min="1" max="800"
-        placeholder="Nomor kursi (dari kartu QR)..." inputmode="numeric">
+      <input class="inp-seat" id="inp-kursi" type="number" min="1" max="800" placeholder="Nomor kursi (dari kartu QR)..." inputmode="numeric">
       <button class="btn-cari" id="btn-cari" onclick="doSearch()" disabled>Cari</button>
     </div>
     <div class="err-msg" id="err-msg">Nomor kursi tidak ditemukan. Pastikan hari dan nomor kursi sudah benar.</div>
@@ -235,7 +143,7 @@
     <div class="info-nama" id="info-nama">—</div>
     <div class="info-tags" id="info-tags"></div>
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--c-student)"></div>Kursi Siswa</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-stu)"></div>Kursi Siswa</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--c-ayah)"></div>Kursi Ayah</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--c-ibu)"></div>Kursi Ibu</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--c-seat)"></div>Kursi Lain</div>
@@ -248,7 +156,7 @@
       <div class="grid-title">🎓 Zona Wisudawan</div>
       <div class="grid-pos" id="wisu-pos">—</div>
     </div>
-    <div class="grid-hint">📱 Pinch layar untuk zoom · Geser untuk scroll</div>
+    <div class="grid-hint">📱 Pinch layar untuk zoom · Geser kiri/kanan untuk scroll</div>
     <div class="svg-scroll" id="scroll-wisu"></div>
   </div>
 
@@ -266,68 +174,57 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 //  CONFIG
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbykuBMalgDRleU3oKr1qPuszJOkRNi4riRyu05a_8hA6la8KHsoouejtcbmX2c1mcXH/exec';
 
-// Blok boundaries — displayed RIGHT to LEFT = [D][C][B][A] on screen
-// Within each blok: highest seat = leftmost col (col 0), lowest = rightmost
-// H1: 794 students across 4 bloks (D=15rows, C=14rows, B=14rows, A=14rows)
-// H2: 726 students (D=13rows, C=13rows, B=12+partial, A=12+partial)
+// WISUDAWAN — display LEFT→RIGHT: D(high)…A(low)
+// Within each blok row: leftmost=highest seat, rightmost=lowest seat
 const BLOK = {
   1: [
-    // Display order: D C B A (left→right on screen)
-    { s:1,   e:210, label:'D', zone:'wisu' },
-    { s:211, e:406, label:'C', zone:'wisu' },
-    { s:407, e:602, label:'B', zone:'wisu' },
-    { s:603, e:794, label:'A', zone:'wisu' },
+    { s:603, e:794, label:'D' },   // leftmost, highest seats
+    { s:407, e:602, label:'C' },
+    { s:211, e:406, label:'B' },
+    { s:1,   e:210, label:'A' },   // rightmost, lowest seats
   ],
   2: [
-    { s:1,   e:182, label:'D', zone:'wisu' },
-    { s:183, e:364, label:'C', zone:'wisu' },
-    { s:365, e:545, label:'B', zone:'wisu' },  // ← fixed: 545 not 546
-    { s:546, e:726, label:'A', zone:'wisu' },  // ← fixed: 546 not 547
+    { s:546, e:726, label:'D' },
+    { s:365, e:545, label:'C' },
+    { s:183, e:364, label:'B' },
+    { s:1,   e:182, label:'A' },
   ]
 };
+const MAX_SEAT = { 1:794, 2:726 };
+const WCOLS = 14;          // wisudawan: 14 seats per blok row
+const P_GROUP = 28;        // parent: 28 seats per group (14 left + 14 right)
+const PCOLS = 14;          // parent: 14 seats per blok row
 
-// Parent zones: 28 seats per row
-// Ayah = seats covering Blok D+C (lower half), Ibu = Blok B+A (upper half)
-const PARENT = {
-  1: {
-    ayah: { s:1,   e:406, cols:28, label:'👨 AYAH', sublabel:'Sisi Kiri Panggung'  },
-    ibu:  { s:407, e:794, cols:28, label:'👩 IBU',  sublabel:'Sisi Kanan Panggung' },
-  },
-  2: {
-    ayah: { s:1,   e:364, cols:28, label:'👨 AYAH', sublabel:'Sisi Kiri Panggung'  },
-    ibu:  { s:365, e:726, cols:28, label:'👩 IBU',  sublabel:'Sisi Kanan Panggung' },
-  }
-};
-
-const WISU_COLS  = 14;
-const SW=11, SH=11, SG=2, BG=20;  // seat dims
+// SVG dimensions
+const SW=11, SH=11, SG=2, BG=20;  // seat w/h, gap, blok-gap
 const U = SW + SG;                  // 13px per unit
 
-const C_BG      = '#f1f5f9';
-const C_SEAT    = '#b8c9de';
-const C_STUDENT = '#d97706';
-const C_AYAH    = '#059669';
-const C_IBU     = '#db2777';
-const C_TEXT    = '#1e3a5f';
-const C_STAGE   = '#0d1e40';
-const C_DIVIDER = '#94a3b8';
+// Colors
+const C_BG   = '#f1f5f9';
+const C_SEAT = '#b8c9de';
+const C_STU  = '#d97706';
+const C_AYAH = '#059669';
+const C_IBU  = '#db2777';
+const C_TEXT = '#1e3a5f';
+const C_NAVY = '#0d1e40';
 
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 //  STATE
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 let seatMap = {};
 let selectedHari = 0;
 const $id = id => document.getElementById(id);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const tag = t => `<span class="info-tag">${t}</span>`;
 
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 //  LOADING
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 function setProgress(pct, msg) {
   $id('ls-bar').style.width = pct + '%';
   $id('ls-status').innerHTML = msg;
@@ -342,9 +239,7 @@ async function loadData() {
     setProgress(72, 'Memproses data...');
     const d = await r.json();
     if (d.status !== 'success' || !d.data.length) throw new Error('empty');
-    d.data.forEach(s => {
-      seatMap[`${s.hari}-${parseInt(s.nomorKursi)}`] = s;
-    });
+    d.data.forEach(s => { seatMap[`${s.hari}-${parseInt(s.nomorKursi)}`] = s; });
     setProgress(95, `✓ <span>${d.data.length}</span> data siswa dimuat`);
     await sleep(500);
     $id('ls').classList.add('hide');
@@ -354,81 +249,44 @@ async function loadData() {
   }
 }
 
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 //  HARI SELECTOR
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 function selectHari(h) {
   selectedHari = h;
   $id('h1-btn').classList.toggle('active', h===1);
   $id('h2-btn').classList.toggle('active', h===2);
   $id('btn-cari').disabled = false;
-  $id('inp-kursi').max = h===1 ? 794 : 726;
+  $id('inp-kursi').max = MAX_SEAT[h];
   $id('err-msg').classList.remove('on');
   $id('inp-kursi').focus();
 }
 $id('inp-kursi').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 //  SEARCH
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 function doSearch() {
   const errEl = $id('err-msg');
   errEl.classList.remove('on');
   if (!selectedHari) return;
-
-  const seatNum = parseInt($id('inp-kursi').value);
-  const maxSeat = selectedHari===1 ? 794 : 726;
-  if (!seatNum || seatNum<1 || seatNum>maxSeat) { errEl.classList.add('on'); return; }
-
-  const student = seatMap[`${selectedHari}-${seatNum}`];
+  const seat = parseInt($id('inp-kursi').value);
+  if (!seat || seat < 1 || seat > MAX_SEAT[selectedHari]) { errEl.classList.add('on'); return; }
+  const student = seatMap[`${selectedHari}-${seat}`];
   if (!student) { errEl.classList.add('on'); return; }
-
-  renderResult(student, seatNum);
+  renderResult(student, seat);
 }
 
-function renderResult(student, seat) {
-  // Info card
-  $id('info-nama').textContent = student.nama;
-  const par  = PARENT[selectedHari];
-  const zone = seat <= par.ayah.e ? 'ayah' : 'ibu';
-  $id('info-tags').innerHTML =
-    tag(`Kursi ${seat}`) + tag(student.cabang) +
-    tag(student.jenjang) + tag(student.kelas) +
-    tag(zone === 'ayah' ? '👨 Sisi Kiri Panggung' : '👩 Sisi Kanan Panggung');
-  $id('info-card').classList.add('on');
-
-  // Wisudawan position
-  const wp = getWisuPos(seat, selectedHari);
-  $id('wisu-pos').innerHTML =
-    `<strong>Blok ${wp.label} · Baris ${wp.row}</strong>Kursi ke-${wp.colFromRight} dari kanan`;
-
-  // Ortu position
-  const pp = getParentPos(seat, selectedHari);
-  $id('ortu-pos').innerHTML =
-    `<strong>${zone==='ayah'?'👨 Ayah':'👩 Ibu'} · Baris ${pp.row}</strong>Posisi ke-${pp.col} dari kanan`;
-
-  // Show cards
-  $id('card-wisu').style.display = 'block';
-  $id('card-ortu').style.display = 'block';
-
-  // Build SVGs
-  buildWisuSVG(selectedHari, seat);
-  buildOrtuSVG(selectedHari, seat);
-
-  setTimeout(() => $id('info-card').scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
-}
-
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 //  POSITION CALCULATORS
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 function getWisuPos(seat, hari) {
   for (const b of BLOK[hari]) {
-    if (seat>=b.s && seat<=b.e) {
-      const offset = seat - b.s;
-      const row    = Math.floor(offset / WISU_COLS) + 1;
-      // Within blok: highest seat = leftmost (col 0), lowest = rightmost
-      // colFromRight: offset%COLS=0 → rightmost → 1
-      const colFromRight = (offset % WISU_COLS) + 1;
+    if (seat >= b.s && seat <= b.e) {
+      const offset   = seat - b.s;
+      const row      = Math.floor(offset / WCOLS) + 1;
+      // Within blok: lowest seat → rightmost (colFromRight=1)
+      const colFromRight = (offset % WCOLS) + 1;
       return { label:b.label, row, colFromRight };
     }
   }
@@ -436,60 +294,90 @@ function getWisuPos(seat, hari) {
 }
 
 function getParentPos(seat, hari) {
-  const par  = PARENT[hari];
-  const zone = seat <= par.ayah.e ? par.ayah : par.ibu;
-  const offset = seat - zone.s;
-  const row    = Math.floor(offset / zone.cols) + 1;
-  const colFromRight = (offset % zone.cols) + 1;
-  return { row, col: colFromRight };
+  // group = row in parent blok
+  const group = Math.ceil(seat / P_GROUP);
+  const pos   = ((seat - 1) % P_GROUP) + 1;  // 1-28
+  if (pos <= PCOLS) {
+    // Left-14: Blok C (Ayah) and Blok A (Ibu)
+    return { blokAyah:'C', blokIbu:'A', row:group, colFromRight:pos };
+  } else {
+    // Right-14: Blok D (Ayah) and Blok B (Ibu)
+    return { blokAyah:'D', blokIbu:'B', row:group, colFromRight:pos-PCOLS };
+  }
 }
 
-// ═══════════════════════════════════════════════
-//  SVG BUILDER — WISUDAWAN
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
+//  RENDER RESULT
+// ════════════════════════════════════════════════
+function renderResult(student, seat) {
+  $id('info-nama').textContent = student.nama;
+  $id('info-tags').innerHTML =
+    tag(`Kursi ${seat}`) + tag(student.cabang) +
+    tag(student.jenjang) + tag(student.kelas);
+  $id('info-card').classList.add('on');
+
+  const wp = getWisuPos(seat, selectedHari);
+  const pp = getParentPos(seat, selectedHari);
+
+  $id('wisu-pos').innerHTML =
+    `<strong>Blok ${wp.label} · Baris ${wp.row}</strong>Kursi ke-${wp.colFromRight} dari kanan`;
+  $id('ortu-pos').innerHTML =
+    `<strong>Ayah: Blok ${pp.blokAyah} · Ibu: Blok ${pp.blokIbu} · Baris ${pp.row}</strong>Kursi ke-${pp.colFromRight} dari kanan`;
+
+  $id('card-wisu').style.display = 'block';
+  $id('card-ortu').style.display = 'block';
+
+  buildWisuSVG(selectedHari, seat);
+  buildOrtuSVG(selectedHari, seat);
+
+  setTimeout(() => $id('info-card').scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
+}
+
+// ════════════════════════════════════════════════
+//  SVG: WISUDAWAN
+//  Display: D(left,high)…A(right,low)
+//  Within each blok: highest seat LEFT, lowest seat RIGHT
+// ════════════════════════════════════════════════
 function buildWisuSVG(hari, hlSeat) {
-  const bloks   = BLOK[hari];
-  const STAGE_H = 30, LABEL_H = 16, TOP = STAGE_H + LABEL_H;
-  const PAD     = 10;
-  const blokW   = WISU_COLS * U;
-  const totalW  = bloks.length * blokW + (bloks.length-1)*BG + PAD*2;
-  const maxRows = Math.max(...bloks.map(b => Math.ceil((b.e-b.s+1)/WISU_COLS)));
-  const totalH  = TOP + maxRows*U + PAD*2;
+  const bloks  = BLOK[hari];
+  const STAGE  = 30, LABLH = 16, TOP = STAGE + LABLH;
+  const PAD    = 10;
+  const blokW  = WCOLS * U;
+  const totalW = bloks.length * blokW + (bloks.length-1)*BG + PAD*2;
+  const maxRows = Math.max(...bloks.map(b => Math.ceil((b.e-b.s+1)/WCOLS)));
+  const totalH = TOP + maxRows*U + PAD*2;
 
   let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${totalW}" height="${totalH}" viewBox="0 0 ${totalW} ${totalH}" style="background:${C_BG};border-radius:10px">`;
 
   // Stage
-  s += `<rect x="${PAD}" y="${PAD}" width="${totalW-PAD*2}" height="${STAGE_H-4}" rx="5" fill="${C_STAGE}"/>`;
-  s += `<text x="${totalW/2}" y="${PAD+STAGE_H-10}" text-anchor="middle" fill="#fbbf24" font-size="9.5" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" letter-spacing="1">▲  MAIN STAGE  ▲</text>`;
+  s += `<rect x="${PAD}" y="${PAD}" width="${totalW-PAD*2}" height="${STAGE-4}" rx="5" fill="${C_NAVY}"/>`;
+  s += `<text x="${totalW/2}" y="${PAD+STAGE-10}" text-anchor="middle" fill="#fbbf24" font-size="9.5" font-family="Plus Jakarta Sans,sans-serif" font-weight="800" letter-spacing="1">▲  MAIN STAGE  ▲</text>`;
 
   bloks.forEach((blok, bi) => {
     const bx = PAD + bi*(blokW+BG);
 
     // Blok label
-    s += `<text x="${bx+blokW/2}" y="${STAGE_H+PAD+11}" text-anchor="middle" fill="${C_TEXT}" font-size="8.5" font-family="Plus Jakarta Sans,sans-serif" font-weight="800">BLOK ${blok.label}</text>`;
+    s += `<text x="${bx+blokW/2}" y="${STAGE+PAD+11}" text-anchor="middle" fill="${C_TEXT}" font-size="8.5" font-family="Plus Jakarta Sans,sans-serif" font-weight="800">BLOK ${blok.label}</text>`;
 
-    // Seats — within blok: highest seat at leftmost col (col 0)
-    // seat blok.s (lowest) → col = WISU_COLS-1 (rightmost)
-    // seat blok.e (highest) → col = 0 (leftmost)
+    // Seats
+    // offset 0 = blok.s (LOWEST seat in blok) → rightmost col (index WCOLS-1)
+    // offset increases → moves LEFT
     const count = blok.e - blok.s + 1;
-    for (let i=0; i<count; i++) {
-      const seat   = blok.s + i;
-      const row    = Math.floor(i / WISU_COLS);
-      // Reverse column: highest seat number in each row = leftmost
-      const colFromLeft = WISU_COLS - 1 - (i % WISU_COLS);
-      const x = bx + colFromLeft * U;
-      const y = TOP + PAD + row * U;
-
-      const isHL = seat === hlSeat;
-      const fill = isHL ? C_STUDENT : C_SEAT;
+    for (let i = 0; i < count; i++) {
+      const seat    = blok.s + i;
+      const row     = Math.floor(i / WCOLS);
+      // col_index: 0=leftmost(highest seat), WCOLS-1=rightmost(lowest seat)
+      const col     = WCOLS - 1 - (i % WCOLS);
+      const x       = bx + col * U;
+      const y       = TOP + PAD + row * U;
+      const isHL    = seat === hlSeat;
+      const fill    = isHL ? C_STU : C_SEAT;
       s += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${isHL?'3':'2'}" fill="${fill}"${isHL?' stroke="white" stroke-width="1.5"':''}/>`;
-      if (isHL) {
-        s += `<text x="${x+SW/2}" y="${y+SH-2.5}" text-anchor="middle" fill="white" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
-      }
+      if (isHL) s += `<text x="${x+SW/2}" y="${y+SH-2.5}" text-anchor="middle" fill="white" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
     }
 
     // Blok border
-    const brows = Math.ceil((blok.e-blok.s+1)/WISU_COLS);
+    const brows = Math.ceil((blok.e-blok.s+1)/WCOLS);
     s += `<rect x="${bx-1}" y="${TOP+PAD-1}" width="${blokW+2}" height="${brows*U+2}" rx="4" fill="none" stroke="${C_TEXT}22" stroke-width="1"/>`;
   });
 
@@ -497,83 +385,125 @@ function buildWisuSVG(hari, hlSeat) {
   $id('scroll-wisu').innerHTML = s;
 }
 
-// ═══════════════════════════════════════════════
-//  SVG BUILDER — ORANG TUA (28 cols per row)
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
+//  SVG: ORANG TUA
+//  Every 28 seats form a group. First 14 = left-14 (Blok C/A), next 14 = right-14 (Blok D/B)
+//  Display left→right: [AyahD:right14][AyahC:left14] | [IbuB:right14][IbuA:left14]
+//  Within each blok: highest seat LEFT, lowest seat RIGHT
+//  Both Ayah and Ibu show ALL seats (same seat# = same row/col in both zones)
+// ════════════════════════════════════════════════
 function buildOrtuSVG(hari, hlSeat) {
-  const par     = PARENT[hari];
-  const LABEL_H = 36;
-  const PAD     = 10;
-  const BG_DIV  = 24; // gap between ayah and ibu sections
+  const maxSeat  = MAX_SEAT[hari];
+  const numGroups = Math.ceil(maxSeat / P_GROUP);  // = max rows in left-14 blok
+  // Right-14 blok may have 1 fewer row if last group's right-14 doesn't exist
+  const lastGroup = numGroups;
+  const lastGroupStart = (lastGroup-1)*P_GROUP + 1;
+  const rightBlokRows = (lastGroupStart + PCOLS <= maxSeat) ? numGroups : numGroups - 1;
 
-  // Calculate dimensions for each zone
-  function zoneW(z) { return z.cols * U; }
-  function zoneRows(z) { return Math.ceil((z.e - z.s + 1) / z.cols); }
+  const LABLH  = 38;
+  const PAD    = 10;
+  const INNER  = 16;   // gap between bloks within same zone (D|C or B|A)
+  const DIVGAP = 24;   // gap between Ayah|Ibu zones
 
-  const ayahW    = zoneW(par.ayah);
-  const ibuW     = zoneW(par.ibu);
-  const ayahRows = zoneRows(par.ayah);
-  const ibuRows  = zoneRows(par.ibu);
-  const maxRows  = Math.max(ayahRows, ibuRows);
+  const zoneW  = PCOLS*U + INNER + PCOLS*U;   // width of one zone (2 bloks)
+  const totalW = PAD + zoneW + DIVGAP + zoneW + PAD;
+  const maxRows = numGroups;  // left-14 blok always has this many rows
+  const totalH = LABLH + maxRows*U + PAD*2;
 
-  const totalW = PAD + ayahW + BG_DIV + ibuW + PAD;
-  const totalH = LABEL_H + maxRows * U + PAD * 2;
+  // X start positions
+  const xAD = PAD;                          // Ayah Blok D (right-14, left of Ayah zone)
+  const xAC = PAD + PCOLS*U + INNER;       // Ayah Blok C (left-14, right of Ayah zone)
+  const xIB = PAD + zoneW + DIVGAP;        // Ibu Blok B (right-14, left of Ibu zone)
+  const xIA = xIB + PCOLS*U + INNER;       // Ibu Blok A (left-14, right of Ibu zone)
 
   let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${totalW}" height="${totalH}" viewBox="0 0 ${totalW} ${totalH}" style="background:${C_BG};border-radius:10px">`;
 
-  // Zone header backgrounds
-  s += `<rect x="${PAD-2}" y="0" width="${ayahW+4}" height="${LABEL_H}" rx="4" fill="${C_AYAH}18"/>`;
-  s += `<rect x="${PAD+ayahW+BG_DIV-2}" y="0" width="${ibuW+4}" height="${LABEL_H}" rx="4" fill="${C_IBU}18"/>`;
+  // Zone background tints
+  s += `<rect x="${PAD-2}" y="0" width="${zoneW+4}" height="${LABLH}" rx="4" fill="${C_AYAH}15"/>`;
+  s += `<rect x="${xIB-2}" y="0" width="${zoneW+4}" height="${LABLH}" rx="4" fill="${C_IBU}15"/>`;
 
-  // Zone labels
-  s += `<text x="${PAD+ayahW/2}" y="17" text-anchor="middle" fill="${C_AYAH}" font-size="10" font-family="Plus Jakarta Sans,sans-serif" font-weight="800">${par.ayah.label}</text>`;
-  s += `<text x="${PAD+ayahW/2}" y="30" text-anchor="middle" fill="${C_AYAH}" font-size="8" font-family="Plus Jakarta Sans,sans-serif" font-weight="600" opacity=".8">${par.ayah.sublabel}</text>`;
+  // Zone headers
+  const hY1=16, hY2=30;
+  s += `<text x="${PAD+zoneW/2}" y="${hY1}" text-anchor="middle" fill="${C_AYAH}" font-size="11" font-family="Plus Jakarta Sans,sans-serif" font-weight="800">👨 AYAH</text>`;
+  s += `<text x="${PAD+zoneW/2}" y="${hY2}" text-anchor="middle" fill="${C_AYAH}" font-size="8" font-family="Plus Jakarta Sans,sans-serif" font-weight="600" opacity=".85">Sisi Kiri Panggung</text>`;
+  s += `<text x="${xIB+zoneW/2}" y="${hY1}" text-anchor="middle" fill="${C_IBU}" font-size="11" font-family="Plus Jakarta Sans,sans-serif" font-weight="800">👩 IBU</text>`;
+  s += `<text x="${xIB+zoneW/2}" y="${hY2}" text-anchor="middle" fill="${C_IBU}" font-size="8" font-family="Plus Jakarta Sans,sans-serif" font-weight="600" opacity=".85">Sisi Kanan Panggung</text>`;
 
-  s += `<text x="${PAD+ayahW+BG_DIV+ibuW/2}" y="17" text-anchor="middle" fill="${C_IBU}" font-size="10" font-family="Plus Jakarta Sans,sans-serif" font-weight="800">${par.ibu.label}</text>`;
-  s += `<text x="${PAD+ayahW+BG_DIV+ibuW/2}" y="30" text-anchor="middle" fill="${C_IBU}" font-size="8" font-family="Plus Jakarta Sans,sans-serif" font-weight="600" opacity=".8">${par.ibu.sublabel}</text>`;
+  // Sub-blok labels
+  function blokLabel(x, label, color) {
+    return `<text x="${x+PCOLS*U/2}" y="${hY2}" text-anchor="middle" fill="${color}" font-size="7.5" font-family="Plus Jakarta Sans,sans-serif" font-weight="700" opacity=".6">BLOK ${label}</text>`;
+  }
+  s += blokLabel(xAD, 'D', C_AYAH);
+  s += blokLabel(xAC, 'C', C_AYAH);
+  s += blokLabel(xIB, 'B', C_IBU);
+  s += blokLabel(xIA, 'A', C_IBU);
 
-  // Divider line
-  const divX = PAD + ayahW + BG_DIV/2;
-  s += `<line x1="${divX}" y1="4" x2="${divX}" y2="${totalH-4}" stroke="${C_DIVIDER}" stroke-width="1.5" stroke-dasharray="4,3" opacity=".5"/>`;
+  // Divider between Ayah and Ibu
+  const divX = PAD + zoneW + DIVGAP/2;
+  s += `<line x1="${divX}" y1="4" x2="${divX}" y2="${totalH-4}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" opacity=".5"/>`;
 
-  // Helper: draw a zone's seats
-  function drawZone(z, startX, hlColor) {
-    const count = z.e - z.s + 1;
-    for (let i=0; i<count; i++) {
-      const seat = z.s + i;
-      const row  = Math.floor(i / z.cols);
-      // Highest seat in each row = leftmost (col 0)
-      const colFromLeft = z.cols - 1 - (i % z.cols);
-      const x = startX + colFromLeft * U;
-      const y = LABEL_H + PAD + row * U;
+  // Inner dividers (between D|C and B|A)
+  const innerDivAX = xAD + PCOLS*U + INNER/2;
+  const innerDivIX = xIB + PCOLS*U + INNER/2;
+  s += `<line x1="${innerDivAX}" y1="${LABLH+2}" x2="${innerDivAX}" y2="${totalH-4}" stroke="${C_TEXT}" stroke-width="0.8" opacity=".15"/>`;
+  s += `<line x1="${innerDivIX}" y1="${LABLH+2}" x2="${innerDivIX}" y2="${totalH-4}" stroke="${C_TEXT}" stroke-width="0.8" opacity=".15"/>`;
 
-      const isHL = seat === hlSeat;
-      const fill = isHL ? hlColor : C_SEAT;
-      s += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${isHL?'3':'2'}" fill="${fill}"${isHL?' stroke="white" stroke-width="1.5"':''}/>`;
-      if (isHL) {
-        s += `<text x="${x+SW/2}" y="${y+SH-2.5}" text-anchor="middle" fill="white" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
-      }
+  // Draw all seats
+  for (let seat = 1; seat <= maxSeat; seat++) {
+    const group      = Math.ceil(seat / P_GROUP);          // 1-indexed row
+    const pos        = ((seat - 1) % P_GROUP) + 1;        // 1-28
+    const rowY       = LABLH + PAD + (group-1) * U;
+    const isHL       = seat === hlSeat;
+
+    if (pos <= PCOLS) {
+      // Left-14: sits in Blok C (Ayah) and Blok A (Ibu)
+      // pos=1 → rightmost (col index PCOLS-1=13), pos=14 → leftmost (col 0)
+      const col = PCOLS - pos;   // 13 when pos=1 ✓, 0 when pos=14 ✓
+      const yy  = rowY;
+
+      // Ayah Blok C
+      s += seat_rect(xAC + col*U, yy, isHL ? C_AYAH : C_SEAT, isHL, seat);
+      // Ibu Blok A
+      s += seat_rect(xIA + col*U, yy, isHL ? C_IBU  : C_SEAT, isHL, seat);
+
+    } else {
+      // Right-14: sits in Blok D (Ayah) and Blok B (Ibu)
+      const p2  = pos - PCOLS;   // 1-14
+      const col = PCOLS - p2;    // 13 when p2=1 ✓, 0 when p2=14 ✓
+      const yy  = rowY;
+
+      // Ayah Blok D
+      s += seat_rect(xAD + col*U, yy, isHL ? C_AYAH : C_SEAT, isHL, seat);
+      // Ibu Blok B
+      s += seat_rect(xIB + col*U, yy, isHL ? C_IBU  : C_SEAT, isHL, seat);
     }
-    // Border
-    const rows = Math.ceil(count / z.cols);
-    s += `<rect x="${startX-1}" y="${LABEL_H+PAD-1}" width="${z.cols*U+2}" height="${rows*U+2}" rx="4" fill="none" stroke="${C_TEXT}22" stroke-width="1"/>`;
   }
 
-  drawZone(par.ayah, PAD,                          C_AYAH);
-  drawZone(par.ibu,  PAD + ayahW + BG_DIV,         C_IBU);
+  // Blok borders
+  const rowsLC = numGroups;     // left-14: all groups
+  const rowsRC = rightBlokRows; // right-14: may be 1 less
+  s += blokBorder(xAD, LABLH+PAD, rowsRC);
+  s += blokBorder(xAC, LABLH+PAD, rowsLC);
+  s += blokBorder(xIB, LABLH+PAD, rowsRC);
+  s += blokBorder(xIA, LABLH+PAD, rowsLC);
 
   s += `</svg>`;
   $id('scroll-ortu').innerHTML = s;
 }
 
-// ═══════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════
-const tag = t => `<span class="info-tag">${t}</span>`;
+function seat_rect(x, y, fill, isHL, seat) {
+  let r = `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${isHL?'3':'2'}" fill="${fill}"${isHL?' stroke="white" stroke-width="1.5"':''}/>`;
+  if (isHL) r += `<text x="${x+SW/2}" y="${y+SH-2.5}" text-anchor="middle" fill="white" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
+  return r;
+}
 
-// ═══════════════════════════════════════════════
+function blokBorder(bx, byStart, rows) {
+  return `<rect x="${bx-1}" y="${byStart-1}" width="${PCOLS*U+2}" height="${rows*U+2}" rx="4" fill="none" stroke="${C_TEXT}22" stroke-width="1"/>`;
+}
+
+// ════════════════════════════════════════════════
 //  START
-// ═══════════════════════════════════════════════
+// ════════════════════════════════════════════════
 loadData();
 </script>
 </body>
