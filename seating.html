@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Denah Kursi — Wisuda Akbar AL-WILDAN 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #060e20;
+      --navy:     #0d1e40;
+      --navy-lt:  #1a3461;
+      --gold:     #fbbf24;
+      --gold-lt:  #fde68a;
+      --gold-dk:  #b45309;
+      --green:    #10b981;
+      --pink:     #f472b6;
+      --blue-lt:  #60a5fa;
+      --white:    #ffffff;
+      --glass:    rgba(255,255,255,0.04);
+      --glass-bd: rgba(251,191,36,0.18);
+      --r-xl:24px; --r-lg:16px; --r-md:12px; --r-sm:8px;
+
+      --c-seat:    #1a3461;
+      --c-student: #fbbf24;
+      --c-ayah:    #10b981;
+      --c-ibu:     #f472b6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100svh;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:
+        repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.016) 39px,rgba(255,255,255,.016) 40px),
+        repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,.016) 39px,rgba(255,255,255,.016) 40px);
+    }
+
+    body::after {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(ellipse 80% 55% at 85% -5%,  rgba(251,191,36,.1) 0%,transparent 65%),
+        radial-gradient(ellipse 60% 45% at 15% 105%, rgba(59,130,246,.1) 0%,transparent 60%);
+    }
+
+    /* ── LOADING ── */
+    .ls {
+      position:fixed; inset:0; z-index:9999;
+      background:var(--bg);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;
+      padding:32px; transition:opacity .5s, visibility .5s;
+    }
+    .ls.hide { opacity:0; visibility:hidden; pointer-events:none; }
+
+    .ls-badge {
+      display:inline-flex; align-items:center; gap:7px;
+      background:rgba(251,191,36,.1); border:1px solid rgba(251,191,36,.28);
+      border-radius:999px; padding:5px 16px;
+      font-size:10px; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:var(--gold);
+    }
+    .ls-badge i { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pdot 2s ease-in-out infinite; }
+    @keyframes pdot{0%,100%{opacity:1;box-shadow:0 0 7px var(--gold);}50%{opacity:.3;box-shadow:none;}}
+
+    .ls-title { font-size:26px; font-weight:900; text-align:center; line-height:1.2; }
+    .ls-title em { font-style:normal; color:var(--gold); }
+
+    .ls-prog-wrap { width:100%; max-width:280px; background:rgba(255,255,255,.07); border-radius:999px; height:6px; overflow:hidden; }
+    .ls-prog-bar { height:100%; width:0%; background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt)); border-radius:999px; transition:width .4s ease; box-shadow:0 0 12px rgba(251,191,36,.5); }
+    .ls-status { font-size:12px; font-weight:600; color:rgba(255,255,255,.4); text-align:center; }
+    .ls-status span { color:var(--gold); }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      position:relative; z-index:1;
+      width:100%; max-width:560px;
+      margin:0 auto;
+      padding:0 16px 60px;
+      display:flex; flex-direction:column; gap:14px;
+    }
+
+    @media(min-width:768px)  { .wrap { max-width:800px; padding:0 32px 60px; gap:18px; } }
+    @media(min-width:1200px) { .wrap { max-width:1100px; } }
+
+    /* ── HEADER ── */
+    .hdr { text-align:center; padding:40px 0 4px; }
+    @media(min-width:768px) { .hdr { padding:52px 0 8px; } }
+
+    .hdr-badge {
+      display:inline-flex; align-items:center; gap:7px;
+      background:rgba(251,191,36,.1); border:1px solid rgba(251,191,36,.28);
+      border-radius:999px; padding:5px 16px; margin-bottom:16px;
+      font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold);
+    }
+    .hdr-badge i { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pdot 2s ease-in-out infinite; }
+
+    .hdr h1 { font-size:26px; font-weight:900; line-height:1.15; letter-spacing:-.4px; }
+    @media(min-width:768px) { .hdr h1 { font-size:34px; } }
+    .hdr h1 em { font-style:normal; color:var(--gold); }
+    .hdr p { margin-top:8px; font-size:13px; color:rgba(255,255,255,.45); }
+    .hdr-rule { width:40px; height:2px; margin:16px auto 0; border-radius:999px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+
+    /* ── CARD ── */
+    .card {
+      width:100%; background:var(--glass); border:1px solid var(--glass-bd);
+      border-radius:var(--r-xl); padding:20px 18px;
+      backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+      box-shadow:0 20px 48px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
+    }
+    @media(min-width:768px) { .card { padding:24px 22px; } }
+
+    .card-lbl {
+      font-size:10px; font-weight:700; letter-spacing:1.8px;
+      text-transform:uppercase; color:var(--gold); margin-bottom:14px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .card-lbl::before { content:''; width:3px; height:14px; border-radius:999px; background:var(--gold); }
+
+    /* ── SEARCH ── */
+    .hari-wrap { display:flex; gap:8px; margin-bottom:12px; }
+    .hari-btn {
+      flex:1; padding:12px; border-radius:var(--r-md);
+      border:1.5px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.5); font-family:inherit;
+      font-size:14px; font-weight:700; cursor:pointer;
+      transition:all .2s;
+    }
+    .hari-btn.active {
+      border-color:var(--gold); background:rgba(251,191,36,.12);
+      color:var(--gold); box-shadow:0 0 0 3px rgba(251,191,36,.1);
+    }
+    .hari-btn:hover:not(.active) { border-color:rgba(255,255,255,.25); color:rgba(255,255,255,.75); }
+
+    .inp-row { display:flex; gap:10px; }
+    .inp-seat {
+      flex:1; background:rgba(255,255,255,.06);
+      border:1.5px solid rgba(255,255,255,.1);
+      border-radius:var(--r-md); color:var(--white);
+      font-family:inherit; font-size:16px; font-weight:600;
+      padding:13px 16px; outline:none;
+      transition:border-color .2s, background .2s, box-shadow .2s;
+      -webkit-appearance:none; appearance:none;
+    }
+    .inp-seat::placeholder { color:rgba(255,255,255,.28); font-weight:500; }
+    .inp-seat:focus { border-color:rgba(251,191,36,.55); background:rgba(255,255,255,.09); box-shadow:0 0 0 3px rgba(251,191,36,.1); }
+
+    .btn-cari {
+      padding:13px 20px; background:var(--gold); border:none;
+      border-radius:var(--r-md); font-family:inherit;
+      font-size:14px; font-weight:800; color:var(--navy);
+      cursor:pointer; transition:transform .18s, opacity .18s;
+      white-space:nowrap;
+    }
+    .btn-cari:active { transform:scale(.97); }
+    .btn-cari:disabled { opacity:.4; cursor:not-allowed; }
+
+    .err-msg { font-size:12px; color:#fca5a5; margin-top:8px; display:none; }
+    .err-msg.on { display:block; }
+
+    /* ── INFO CARD ── */
+    .info-card { display:none; animation:fadeUp .3s ease; }
+    .info-card.on { display:block; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;} }
+
+    .info-nama { font-size:18px; font-weight:800; margin-bottom:8px; color:var(--white); }
+    @media(min-width:768px) { .info-nama { font-size:22px; } }
+
+    .info-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+    .info-tag {
+      background:rgba(251,191,36,.12); border:1px solid rgba(251,191,36,.28);
+      border-radius:999px; padding:3px 12px;
+      font-size:11px; font-weight:700; color:var(--gold);
+    }
+
+    .legend { display:flex; flex-wrap:wrap; gap:10px; }
+    .legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:rgba(255,255,255,.6); font-weight:600; }
+    .legend-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; }
+
+    /* ── GRID SECTIONS ── */
+    .grid-sections { display:flex; flex-direction:column; gap:14px; }
+    @media(min-width:1024px) {
+      .grid-sections { display:grid; grid-template-columns:1fr; }
+      .parent-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    }
+
+    .grid-card { width:100%; }
+
+    .grid-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px 10px;
+    }
+
+    .grid-title {
+      display:flex; align-items:center; gap:8px;
+      font-size:12px; font-weight:700; color:var(--gold);
+      letter-spacing:1.5px; text-transform:uppercase;
+    }
+
+    .grid-info { font-size:11px; color:rgba(255,255,255,.4); font-weight:500; }
+
+    .grid-hint {
+      padding:0 16px 8px;
+      font-size:10px; color:rgba(255,255,255,.3);
+      display:flex; align-items:center; gap:5px;
+    }
+
+    /* ── PANZOOM CONTAINER ── */
+    .pz-wrap {
+      margin:0 16px 16px;
+      background:#070f22;
+      border-radius:var(--r-md);
+      border:1px solid rgba(255,255,255,.07);
+      overflow:hidden;
+      position:relative;
+      cursor:grab;
+      touch-action:none;
+      user-select:none;
+      -webkit-user-select:none;
+    }
+    .pz-wrap:active { cursor:grabbing; }
+
+    .pz-wrap.wisu  { height:220px; }
+    .pz-wrap.parent { height:180px; }
+
+    @media(min-width:768px) {
+      .pz-wrap.wisu  { height:340px; }
+      .pz-wrap.parent { height:260px; }
+    }
+    @media(min-width:1200px) {
+      .pz-wrap.wisu  { height:420px; }
+      .pz-wrap.parent { height:320px; }
+    }
+
+    .pz-inner {
+      width:100%; height:100%;
+      transform-origin:0 0;
+      will-change:transform;
+    }
+
+    .pz-inner svg {
+      display:block;
+      width:100%; height:100%;
+    }
+
+    /* ── ZOOM CONTROLS ── */
+    .zoom-btns {
+      position:absolute; right:8px; bottom:8px;
+      display:flex; flex-direction:column; gap:4px; z-index:10;
+    }
+    .zoom-btn {
+      width:28px; height:28px;
+      background:rgba(13,30,64,.9); border:1px solid rgba(251,191,36,.3);
+      border-radius:6px; color:var(--gold);
+      font-size:16px; font-weight:700; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s;
+    }
+    .zoom-btn:hover { background:rgba(251,191,36,.15); }
+    .zoom-btn:active { transform:scale(.95); }
+
+    /* ── EMPTY STATE ── */
+    .grid-empty {
+      height:180px; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:10px;
+      color:rgba(255,255,255,.2); font-size:13px;
+      padding:16px;
+    }
+    .grid-empty-icon { font-size:32px; opacity:.4; }
+
+    /* ── FOOTER ── */
+    .foot { font-size:12px; color:rgba(255,255,255,.2); text-align:center; padding-top:4px; }
+    .foot a { color:var(--gold); text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="ls" id="ls">
+  <div class="ls-badge"><i></i> Wisuda Akbar 2026</div>
+  <div class="ls-title">Denah <em>Kursi</em><br>AL-WILDAN 2026</div>
+  <div class="ls-prog-wrap"><div class="ls-prog-bar" id="ls-bar"></div></div>
+  <div class="ls-status" id="ls-status">Memuat data siswa...</div>
+</div>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-badge"><i></i> Seating Arrangement</div>
+    <h1>Denah <em>Kursi</em> Wisuda<br>Akbar AL-WILDAN 2026</h1>
+    <p>Cari posisi duduk siswa, ayah, dan ibu</p>
+    <div class="hdr-rule"></div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="card">
+    <div class="card-lbl">Cari Kursi</div>
+    <div class="hari-wrap">
+      <button class="hari-btn" id="hari1-btn" onclick="selectHari(1)">
+        Hari 1 — Ikhwan
+      </button>
+      <button class="hari-btn" id="hari2-btn" onclick="selectHari(2)">
+        Hari 2 — Akhwat
+      </button>
+    </div>
+    <div class="inp-row">
+      <input class="inp-seat" id="inp-kursi" type="number" min="1" max="800"
+        placeholder="Masukkan nomor kursi..." inputmode="numeric"
+        onkeydown="if(event.key==='Enter') doSearch()">
+      <button class="btn-cari" id="btn-cari" onclick="doSearch()" disabled>Cari</button>
+    </div>
+    <div class="err-msg" id="err-msg">Kursi tidak ditemukan. Pastikan nomor kursi dan hari sudah benar.</div>
+  </div>
+
+  <!-- INFO CARD -->
+  <div class="card info-card" id="info-card">
+    <div class="card-lbl">Informasi Siswa</div>
+    <div class="info-nama" id="info-nama">—</div>
+    <div class="info-tags" id="info-tags"></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-student)"></div> Kursi Siswa</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-ayah)"></div> Kursi Ayah</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-ibu)"></div> Kursi Ibu</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-seat)"></div> Kursi Lain</div>
+    </div>
+  </div>
+
+  <!-- GRID SECTIONS -->
+  <div class="grid-sections" id="grid-sections" style="display:none">
+
+    <!-- WISUDAWAN -->
+    <div class="card grid-card" id="wisu-card">
+      <div class="grid-header">
+        <div class="grid-title">🎓 Zona Wisudawan</div>
+        <div class="grid-info" id="wisu-info">—</div>
+      </div>
+      <div class="grid-hint">📱 Pinch zoom · 🖥 Scroll wheel · Drag to pan</div>
+      <div class="pz-wrap wisu" id="pz-wisu">
+        <div class="pz-inner" id="inner-wisu"></div>
+        <div class="zoom-btns">
+          <button class="zoom-btn" onclick="zoomIn('wisu')">+</button>
+          <button class="zoom-btn" onclick="zoomOut('wisu')">−</button>
+          <button class="zoom-btn" onclick="zoomReset('wisu')" style="font-size:11px">⌂</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARENT ROW -->
+    <div class="parent-row">
+
+      <!-- AYAH -->
+      <div class="card grid-card" id="ayah-card">
+        <div class="grid-header">
+          <div class="grid-title">👨 Zona Ayah</div>
+          <div class="grid-info" id="ayah-info">—</div>
+        </div>
+        <div class="grid-hint">Pinch zoom · Scroll to zoom · Drag to pan</div>
+        <div class="pz-wrap parent" id="pz-ayah">
+          <div class="pz-inner" id="inner-ayah"></div>
+          <div class="zoom-btns">
+            <button class="zoom-btn" onclick="zoomIn('ayah')">+</button>
+            <button class="zoom-btn" onclick="zoomOut('ayah')">−</button>
+            <button class="zoom-btn" onclick="zoomReset('ayah')" style="font-size:11px">⌂</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IBU -->
+      <div class="card grid-card" id="ibu-card">
+        <div class="grid-header">
+          <div class="grid-title">👩 Zona Ibu</div>
+          <div class="grid-info" id="ibu-info">—</div>
+        </div>
+        <div class="grid-hint">Pinch zoom · Scroll to zoom · Drag to pan</div>
+        <div class="pz-wrap parent" id="pz-ibu">
+          <div class="pz-inner" id="inner-ibu"></div>
+          <div class="zoom-btns">
+            <button class="zoom-btn" onclick="zoomIn('ibu')">+</button>
+            <button class="zoom-btn" onclick="zoomOut('ibu')">−</button>
+            <button class="zoom-btn" onclick="zoomReset('ibu')" style="font-size:11px">⌂</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="foot">&copy; 2026 <a href="#">AL-WILDAN Islamic School</a> — Panitia Wisuda Akbar</div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════════════
+const GAS_URL = 'YOUR_GAS_WEB_APP_URL';
+
+// Blok boundaries [start, end] per hari
+const BLOK = {
+  1: [
+    { s:1,   e:210, label:'D' },  // 15 rows
+    { s:211, e:406, label:'C' },  // 14 rows
+    { s:407, e:602, label:'B' },  // 14 rows
+    { s:603, e:794, label:'A' },  // 14 rows (partial last)
+  ],
+  2: [
+    { s:1,   e:182, label:'D' },  // 13 rows
+    { s:183, e:364, label:'C' },  // 13 rows
+    { s:365, e:546, label:'B' },  // 13 rows
+    { s:547, e:726, label:'A' },  // 13 rows (partial last)
+  ]
+};
+
+const MAX_SEAT = { 1: 794, 2: 726 };
+const COLS = 14;       // seats per blok row
+const P_COLS = 28;     // seats per parent row
+
+// SVG constants
+const SW = 10, SH = 10, SG = 2, BG = 18;
+const U  = SW + SG;     // unit per seat (12px)
+
+// Colors
+const C_SEAT    = '#1a3461';
+const C_STUDENT = '#fbbf24';
+const C_AYAH    = '#10b981';
+const C_IBU     = '#f472b6';
+const C_HL_RIM  = '#ffffff22';
+
+// ═══════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════
+let allStudents = [];
+let seatMap     = {};
+let selectedHari = 0;
+let panzoomState = {};
+
+// ═══════════════════════════════════════════════════
+//  LOADING
+// ═══════════════════════════════════════════════════
+const lsBar    = document.getElementById('ls-bar');
+const lsStatus = document.getElementById('ls-status');
+const lsEl     = document.getElementById('ls');
+
+function setProgress(pct, msg) {
+  lsBar.style.width = pct + '%';
+  lsStatus.innerHTML = msg;
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function loadData() {
+  try {
+    setProgress(15, 'Menghubungkan ke server...');
+    await sleep(200);
+
+    setProgress(35, 'Mengambil data <span>siswa</span>...');
+    const r = await fetch(`${GAS_URL}?action=getAllStudents`);
+
+    setProgress(70, 'Memproses data...');
+    const d = await r.json();
+
+    if (d.status !== 'success' || !d.data.length) throw new Error('empty');
+
+    allStudents = d.data;
+
+    // Build seatMap: key = "hari-kursi"
+    allStudents.forEach(s => {
+      const key = `${s.hari}-${parseInt(s.nomorKursi)}`;
+      seatMap[key] = s;
+    });
+
+    setProgress(95, `✓ <span>${allStudents.length}</span> data dimuat`);
+    await sleep(500);
+
+    lsEl.classList.add('hide');
+
+  } catch (err) {
+    setProgress(100, '❌ Gagal memuat — <span>refresh halaman</span>');
+    lsBar.style.background = '#ef4444';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  HARI SELECTOR
+// ═══════════════════════════════════════════════════
+function selectHari(h) {
+  selectedHari = h;
+  document.getElementById('hari1-btn').classList.toggle('active', h === 1);
+  document.getElementById('hari2-btn').classList.toggle('active', h === 2);
+  document.getElementById('btn-cari').disabled = false;
+  document.getElementById('inp-kursi').max = MAX_SEAT[h];
+  document.getElementById('err-msg').classList.remove('on');
+}
+
+// ═══════════════════════════════════════════════════
+//  SEARCH
+// ═══════════════════════════════════════════════════
+function doSearch() {
+  const errEl = document.getElementById('err-msg');
+  errEl.classList.remove('on');
+
+  if (!selectedHari) return;
+
+  const seatNum = parseInt(document.getElementById('inp-kursi').value);
+  if (!seatNum || seatNum < 1 || seatNum > MAX_SEAT[selectedHari]) {
+    errEl.classList.add('on');
+    return;
+  }
+
+  const key = `${selectedHari}-${seatNum}`;
+  const student = seatMap[key];
+
+  if (!student) {
+    errEl.classList.add('on');
+    return;
+  }
+
+  showResult(student, seatNum);
+}
+
+function showResult(student, seatNum) {
+  // Info card
+  document.getElementById('info-nama').textContent = student.nama;
+  const tags = document.getElementById('info-tags');
+  tags.innerHTML =
+    tag(`Kursi ${seatNum}`) +
+    tag(student.cabang) +
+    tag(student.jenjang) +
+    tag(student.kelas) +
+    tag(student.hari === 1 ? 'Hari 1 — Ikhwan' : 'Hari 2 — Akhwat');
+  document.getElementById('info-card').classList.add('on');
+
+  // Compute positions
+  const wisuPos = getWisuPos(seatNum, selectedHari);
+  const parRow  = Math.ceil(seatNum / P_COLS);
+  const parCol  = seatNum - (parRow - 1) * P_COLS;
+
+  // Update section headers
+  document.getElementById('wisu-info').textContent =
+    `Blok ${wisuPos.label} · Baris ${wisuPos.row} · Posisi ${wisuPos.col} dari kiri`;
+  document.getElementById('ayah-info').textContent =
+    `Baris ${parRow} · Posisi ${parCol} dari kiri`;
+  document.getElementById('ibu-info').textContent =
+    `Baris ${parRow} · Posisi ${parCol} dari kiri`;
+
+  // Show grid sections
+  document.getElementById('grid-sections').style.display = 'flex';
+  document.getElementById('grid-sections').style.flexDirection = 'column';
+
+  // Build SVGs
+  buildWisuSVG(selectedHari, seatNum);
+  buildParentSVG('ayah', selectedHari, seatNum);
+  buildParentSVG('ibu',  selectedHari, seatNum);
+
+  // Scroll to result
+  setTimeout(() => {
+    document.getElementById('info-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 100);
+}
+
+// ═══════════════════════════════════════════════════
+//  POSITION CALCULATOR
+// ═══════════════════════════════════════════════════
+function getWisuPos(seat, hari) {
+  const bloks = BLOK[hari];
+  for (const b of bloks) {
+    if (seat >= b.s && seat <= b.e) {
+      const offset = seat - b.s;
+      const row = Math.floor(offset / COLS) + 1;
+      const col = (offset % COLS) + 1;
+      return { label: b.label, row, col };
+    }
+  }
+  return { label: '?', row: 0, col: 0 };
+}
+
+// ═══════════════════════════════════════════════════
+//  SVG BUILDERS
+// ═══════════════════════════════════════════════════
+function buildWisuSVG(hari, hlSeat) {
+  const bloks = BLOK[hari];
+  const STAGE_H = 28, LABEL_H = 14, TOP = STAGE_H + LABEL_H;
+
+  // Calculate dimensions
+  const blokW   = COLS * U;
+  const totalW  = bloks.length * blokW + (bloks.length - 1) * BG;
+  const maxRows = Math.max(...bloks.map(b => Math.ceil((b.e - b.s + 1) / COLS)));
+  const totalH  = TOP + maxRows * U + 8;
+
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW} ${totalH}" preserveAspectRatio="xMidYMid meet">`;
+
+  // Stage
+  svg += `<rect x="0" y="2" width="${totalW}" height="${STAGE_H - 4}" rx="4" fill="#0d1e40"/>`;
+  svg += `<text x="${totalW/2}" y="${STAGE_H - 4}" text-anchor="middle" fill="#fbbf24" font-size="9" font-family="Plus Jakarta Sans,sans-serif" font-weight="700">▲ MAIN STAGE ▲</text>`;
+
+  bloks.forEach((blok, bi) => {
+    const bx = bi * (blokW + BG);
+
+    // Blok label
+    svg += `<text x="${bx + blokW/2}" y="${STAGE_H + 11}" text-anchor="middle" fill="#fbbf24" font-size="8" font-family="Plus Jakarta Sans,sans-serif" font-weight="700">BLOK ${blok.label}</text>`;
+
+    // Seats
+    for (let seat = blok.s; seat <= blok.e; seat++) {
+      const offset = seat - blok.s;
+      const col = offset % COLS;
+      const row = Math.floor(offset / COLS);
+      const x = bx + col * U;
+      const y = TOP + row * U;
+
+      const isHL = seat === hlSeat;
+      const fill = isHL ? C_STUDENT : C_SEAT;
+      const rx   = isHL ? '2.5' : '1.5';
+
+      svg += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${rx}" fill="${fill}"`;
+      if (isHL) svg += ` stroke="#ffffff" stroke-width="1.5"`;
+      svg += `/>`;
+
+      // Highlight number label
+      if (isHL) {
+        svg += `<text x="${x + SW/2}" y="${y + SH - 2}" text-anchor="middle" fill="${C_SEAT}" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
+      }
+    }
+
+    // Blok border (subtle)
+    const brows = Math.ceil((blok.e - blok.s + 1) / COLS);
+    svg += `<rect x="${bx - 1}" y="${TOP - 1}" width="${blokW + 2}" height="${brows * U + 2}" rx="3" fill="none" stroke="rgba(251,191,36,0.1)" stroke-width="1"/>`;
+  });
+
+  svg += `</svg>`;
+
+  const inner = document.getElementById('inner-wisu');
+  inner.innerHTML = svg;
+  initPanZoom('wisu');
+}
+
+function buildParentSVG(zone, hari, hlSeat) {
+  const maxSeat = MAX_SEAT[hari];
+  const totalRows = Math.ceil(maxSeat / P_COLS);
+  const LABEL_H = 18;
+
+  const totalW = P_COLS * U;
+  const totalH = LABEL_H + totalRows * U + 4;
+
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW} ${totalH}" preserveAspectRatio="xMidYMid meet">`;
+
+  // Label
+  const zLabel = zone === 'ayah' ? '👨 ZONA AYAH' : '👩 ZONA IBU';
+  const zColor = zone === 'ayah' ? C_AYAH : C_IBU;
+  svg += `<text x="${totalW/2}" y="13" text-anchor="middle" fill="${zColor}" font-size="9" font-family="Plus Jakarta Sans,sans-serif" font-weight="700">${zLabel}</text>`;
+
+  // Seats
+  for (let seat = 1; seat <= maxSeat; seat++) {
+    const offset = seat - 1;
+    const col = offset % P_COLS;
+    const row = Math.floor(offset / P_COLS);
+    const x = col * U;
+    const y = LABEL_H + row * U;
+
+    const isHL = seat === hlSeat;
+    const fill = isHL ? zColor : C_SEAT;
+    const rx   = isHL ? '2.5' : '1.5';
+
+    svg += `<rect x="${x}" y="${y}" width="${SW}" height="${SH}" rx="${rx}" fill="${fill}"`;
+    if (isHL) svg += ` stroke="#ffffff" stroke-width="1.5"`;
+    svg += `/>`;
+
+    if (isHL) {
+      svg += `<text x="${x + SW/2}" y="${y + SH - 2}" text-anchor="middle" fill="${C_SEAT}" font-size="5.5" font-weight="800" font-family="Plus Jakarta Sans,sans-serif">${seat}</text>`;
+    }
+  }
+
+  svg += `</svg>`;
+
+  const inner = document.getElementById(`inner-${zone}`);
+  inner.innerHTML = svg;
+  initPanZoom(zone);
+}
+
+// ═══════════════════════════════════════════════════
+//  PANZOOM
+// ═══════════════════════════════════════════════════
+function initPanZoom(id) {
+  const wrapper = document.getElementById(`pz-${id}`);
+  const inner   = document.getElementById(`inner-${id}`);
+
+  let scale = 1, tx = 0, ty = 0;
+  let lastDist = null;
+  let dragging = false, lastX = 0, lastY = 0;
+  let lastTouches = [];
+
+  const MIN_SCALE = 0.3, MAX_SCALE = 10;
+
+  function clamp(v, a, b) { return Math.min(Math.max(v, a), b); }
+
+  function apply() {
+    inner.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
+    inner.style.transformOrigin = '0 0';
+  }
+
+  function getDist(t) {
+    return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  }
+
+  // Touch
+  wrapper.addEventListener('touchstart', e => {
+    e.preventDefault();
+    lastTouches = Array.from(e.touches);
+    if (e.touches.length === 1) {
+      dragging = true;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    }
+    if (e.touches.length === 2) {
+      lastDist = getDist(e.touches);
+    }
+  }, { passive: false });
+
+  wrapper.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (e.touches.length === 2) {
+      const dist = getDist(e.touches);
+      if (lastDist) {
+        const factor = dist / lastDist;
+        // Zoom around center of two fingers
+        const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+        const rect = wrapper.getBoundingClientRect();
+        const px = cx - rect.left;
+        const py = cy - rect.top;
+
+        const newScale = clamp(scale * factor, MIN_SCALE, MAX_SCALE);
+        const ratio = newScale / scale;
+        tx = px - ratio * (px - tx);
+        ty = py - ratio * (py - ty);
+        scale = newScale;
+      }
+      lastDist = dist;
+
+      // Also handle pan with 2 fingers
+      if (lastTouches.length === 2) {
+        const prevMx = (lastTouches[0].clientX + lastTouches[1].clientX) / 2;
+        const prevMy = (lastTouches[0].clientY + lastTouches[1].clientY) / 2;
+        const curMx  = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const curMy  = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+        tx += curMx - prevMx;
+        ty += curMy - prevMy;
+      }
+
+    } else if (e.touches.length === 1 && dragging) {
+      tx += e.touches[0].clientX - lastX;
+      ty += e.touches[0].clientY - lastY;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    }
+    lastTouches = Array.from(e.touches);
+    apply();
+  }, { passive: false });
+
+  wrapper.addEventListener('touchend', e => {
+    lastTouches = Array.from(e.touches);
+    if (e.touches.length < 2) lastDist = null;
+    if (e.touches.length === 0) dragging = false;
+  });
+
+  // Mouse (desktop)
+  wrapper.addEventListener('mousedown', e => {
+    dragging = true;
+    lastX = e.clientX; lastY = e.clientY;
+    wrapper.style.cursor = 'grabbing';
+  });
+  wrapper.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    tx += e.clientX - lastX;
+    ty += e.clientY - lastY;
+    lastX = e.clientX; lastY = e.clientY;
+    apply();
+  });
+  const stopDrag = () => { dragging = false; wrapper.style.cursor = 'grab'; };
+  wrapper.addEventListener('mouseup', stopDrag);
+  wrapper.addEventListener('mouseleave', stopDrag);
+
+  // Wheel (desktop zoom)
+  wrapper.addEventListener('wheel', e => {
+    e.preventDefault();
+    const rect = wrapper.getBoundingClientRect();
+    const px = e.clientX - rect.left;
+    const py = e.clientY - rect.top;
+    const factor = e.deltaY < 0 ? 1.12 : 0.89;
+    const newScale = clamp(scale * factor, MIN_SCALE, MAX_SCALE);
+    const ratio = newScale / scale;
+    tx = px - ratio * (px - tx);
+    ty = py - ratio * (py - ty);
+    scale = newScale;
+    apply();
+  }, { passive: false });
+
+  // Store state for zoom buttons
+  panzoomState[id] = { scale, tx, ty, apply, clamp, wrapper, inner, MIN_SCALE, MAX_SCALE };
+
+  // Refresh state ref on change
+  const origApply = apply;
+  panzoomState[id].getState = () => ({ scale, tx, ty });
+  panzoomState[id].setState = (s, x, y) => { scale = s; tx = x; ty = y; origApply(); };
+
+  apply();
+}
+
+function zoomIn(id)    { const st = panzoomState[id]; if(!st) return; const s = st.getState(); st.setState(Math.min(s.scale*1.3, 10), s.tx, s.ty); }
+function zoomOut(id)   { const st = panzoomState[id]; if(!st) return; const s = st.getState(); st.setState(Math.max(s.scale*0.77, 0.3), s.tx, s.ty); }
+function zoomReset(id) { const st = panzoomState[id]; if(!st) return; st.setState(1, 0, 0); }
+
+// ═══════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════
+const tag = t => `<span class="info-tag">${t}</span>`;
+
+// Input: press Enter
+document.getElementById('inp-kursi').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+// ═══════════════════════════════════════════════════
+//  START
+// ═══════════════════════════════════════════════════
+loadData();
+</script>
+</body>
+</html>
